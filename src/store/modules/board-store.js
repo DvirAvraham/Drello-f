@@ -116,7 +116,8 @@ export default {
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
-      if (action?.type === 'members' && currTask?.members.length > task?.members.length) return
+      if (action?.type === 'members' && (currTask?.members?.length || currTask?.members?.length > task?.members?.length)) return
+
       const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, title: task.title })
       if (action?.type === 'members') activity.toMember = action.item;
       state.currentBoard.activities.unshift(activity);
