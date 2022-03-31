@@ -15,7 +15,6 @@
           </div>
           <span class="name">{{ member.fullname }}</span>
         </div>
-        <span class="username">({{ member.username }})</span>
         <span class="icon-complete" v-if="currTaskMembersIds.includes(member._id)"></span>
       </li>
     </ul>
