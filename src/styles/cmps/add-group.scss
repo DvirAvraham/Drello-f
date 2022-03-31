@@ -40,6 +40,8 @@
         & .add-group-btn {
             @include addSaveBtn();
             width: fit-content;
+
+            
         }
     }
 
@@ -66,4 +68,12 @@
         background-color: #ebecf0;
         box-shadow: 1px 7px 5px -4px rgb(0 0 0 / 15%);
     }
+}
+
+.add-group-btn{
+    display: flex;
+    align-items: center;
+ & span {
+     padding-right: 5px;
+}
 }
