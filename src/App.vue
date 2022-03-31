@@ -27,11 +27,13 @@ export default {
 				ElNotification({
 					title,
 					message,
+					dangerouslyUseHTMLString: true,
 					type: 'success',
 				})
 			} else ElNotification({
 				title,
 				message,
+				dangerouslyUseHTMLString: true,
 				type: 'info',
 			})
 		},
@@ -44,14 +46,14 @@ export default {
 			let message
 			if (activity.toMember?._id) {
 				title = "you've been tagged"
-				message = byMember + ' just ' + ' tagged you at ' + itemName + ' ' + boardName + ' board'
+				message = byMember + ' just ' + ' tagged you at ' + "'" + itemName + "' at " + boardName + ' board'
 				if (userService.getLoggedinUser()._id === activity.toMember._id) {
 					this.notify(true, title, message)
 					console.log('hi', userService.getLoggedinUser().fullname)
 				}
 			} else {
 				title = activity.txt
-				message = byMember + ' just ' + "'" + title + "'" + ' to ' + boardName + ' board'
+				message = byMember + ' just ' + title + ' to ' + "<a href=`http://localhost:3000/#/board/${activity.boardId}` ></a>" + boardName + ' board'
 				this.notify(null, title, message)
 				console.log('hi everyone')
 			}
