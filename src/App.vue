@@ -22,26 +22,39 @@ export default {
 		await this.$store.dispatch({ type: 'loadBoards' })
 	},
 	methods: {
-		notify(isPrivate = null) {
+		notify(isPrivate = null, title, message) {
 			if (isPrivate) {
 				ElNotification({
-					title: 'Success',
-					message: 'This is a success message',
+					title,
+					message,
 					type: 'success',
 				})
 			} else ElNotification({
-				title: 'global change',
-				message: 'This is an info message',
+				title,
+				message,
 				type: 'info',
 			})
 		},
 		notifyActivity(activity) {
+			const byMember = activity.byMember.fullname
+			const toMember = activity.to
+			const boardName = activity.boardTitle
+			const itemName = activity.item?.taskTitle || activity.item?.taskGroup
+			let title
+			let message
 			if (activity.toMember?._id) {
+				title = "you've been tagged"
+				message = byMember + ' just ' + ' tagged you at ' + itemName + ' ' + boardName + ' board'
 				if (userService.getLoggedinUser()._id === activity.toMember._id) {
-					this.notify(true)
+					this.notify(true, title, message)
 					console.log('hi', userService.getLoggedinUser().fullname)
 				}
-			} else this.notify()
+			} else {
+				title = activity.txt
+				message = byMember + ' just ' + "'" + title + "'" + ' to ' + boardName + ' board'
+				this.notify(null, title, message)
+				console.log('hi everyone')
+			}
 		},
 	},
 	computed: {
