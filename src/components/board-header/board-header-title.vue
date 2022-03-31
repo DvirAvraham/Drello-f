@@ -33,7 +33,7 @@ export default {
 	},
 	computed: {
 		userId() {
-			return this.$store.getters.miniUser._id;
+			return this.$store.getters.miniUser?._id;
 		},
 		isEditAble() {
 			return this.createdBy === this.userId;
