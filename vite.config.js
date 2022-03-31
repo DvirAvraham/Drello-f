@@ -12,7 +12,8 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../backend/public',
+    outDir: '../drello/public',
     emptyOutDir: true,
-  },
+    chunkSizeWarningLimit: 1500
+  }
 });

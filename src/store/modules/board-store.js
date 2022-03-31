@@ -143,7 +143,8 @@ export default {
         socketService.off('board update')
         socketService.on('board update', board => {
           if (board._id === state.currentBoard?._id) {
-            commit({ type: 'saveBoard', board });
+            // commit({ type: 'saveBoard', board });
+            console.log(board);
             commit({ type: 'setCurrentBoard', board });
           }
         })
@@ -158,8 +159,9 @@ export default {
       }
 
       try {
+        const boardCopy = JSON.parse(JSON.stringify(board))
+        commit({ type: 'saveBoard', board: boardCopy });
         const savedBoard = await boardService.saveBoard(board);
-        commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
         return savedBoard;
       } catch (err) {
         console.log(err);

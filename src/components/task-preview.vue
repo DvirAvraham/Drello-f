@@ -30,7 +30,7 @@
         >{{ task.title }}</p>
         <textarea
           v-model="taskCopy.title"
-          @input="updateTask"
+          @change="updateTask"
           v-if="isQuickEdit"
           name
           id

@@ -48,7 +48,8 @@ function getGuestUser() {
 }
 
 function _saveLocalUser(user) {
-  sessionStorage.setItem(LOGGEDIN_USER_KEY, JSON.stringify(user))
+  const { activities, ...userToSave } = user;
+  sessionStorage.setItem(LOGGEDIN_USER_KEY, JSON.stringify(userToSave))
   return user
 }
 
