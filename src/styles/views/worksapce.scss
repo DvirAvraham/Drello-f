@@ -1,6 +1,9 @@
 .workspace-container{
-    padding-top:65px;
+    padding-top: 20px;
     & h3{
-        padding-top: 45px;
+        padding-top: 60px;
+        &:first-of-type {
+            padding-top: 30px;
+        }
     }
 }

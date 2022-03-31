@@ -1,7 +1,13 @@
 <template lang="">
     <section class="workspace-container main-layout">
         <h2>Workspace</h2>
-        <board-list @toggleFavorite="toggleFavorite" :boards="boards"></board-list>
+
+		<h3>Starred Boards</h3>
+        <board-list @toggleFavorite="toggleFavorite" :boards="starredBoards"></board-list>
+
+		<h3>Other Boards</h3>
+		<board-list @toggleFavorite="toggleFavorite" :boards="otherBoards"></board-list>
+		
     </section>
 </template>
 <script>
@@ -24,7 +30,13 @@ export default {
 	computed: {
 		boards() {
 			return this.$store.getters.boards
-		}
+		},
+		starredBoards() {
+			return this.boards.filter(board => board.isFavorite)
+		},
+		otherBoards() {
+			return this.boards.filter(board => !board.isFavorite)
+		},
 	},
 	components: {
 		workspaceFilter,

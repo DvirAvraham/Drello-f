@@ -1,11 +1,17 @@
 .board-list {
-  display: grid;
+  // display: grid;
   padding: 0;
   list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  grid-auto-rows: 120px;
-  gap: 10px;
-  grid-auto-flow: dense;
+  // grid-template-columns: repeat(auto-fill, minmax(140px, 190px));
+  // grid-auto-rows: 90px;
+  // gap: 10px;
+  // grid-auto-flow: dense;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 16px;
+  row-gap: 32px;
 
   & li {
     cursor: pointer;
@@ -15,6 +21,10 @@
     border-radius: 3px;
     position: relative;
     padding: 10px;
+    padding: 0;
+    transform: translate(0);
+    width: 190px;
+    height: 90px
   }
   & .star {
     font-size: 12px;
