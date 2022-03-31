@@ -1,9 +1,28 @@
 .workspace-container{
     padding-top: 20px;
     & h3{
+        display: flex;
+        align-items: center;
         padding-top: 60px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        margin-bottom: 6px;
+        color: #172b4d;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+
         &:first-of-type {
             padding-top: 30px;
+        }
+
+        .icon-member {
+            font-size: 24px;
+            color: #42526e;
+            height: 32px;
+            line-height: 32px;
+            width: 32px;
+            font-weight: 400;
+            margin-bottom: 0;
         }
     }
 }

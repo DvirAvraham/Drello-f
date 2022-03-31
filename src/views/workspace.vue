@@ -2,12 +2,12 @@
     <section class="workspace-container main-layout">
         <h2>Workspace</h2>
 
-		<h3>Starred Boards</h3>
+		<h3><span class="icon-member"></span>Starred Boards</h3>
         <board-list @toggleFavorite="toggleFavorite" :boards="starredBoards"></board-list>
 
-		<h3>Other Boards</h3>
+		<h3><span class="icon-member"></span>Other Boards</h3>
 		<board-list @toggleFavorite="toggleFavorite" :boards="otherBoards"></board-list>
-		
+
     </section>
 </template>
 <script>
