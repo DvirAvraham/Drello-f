@@ -37,15 +37,14 @@ function getEmptyGroup(title = '', tasks = []) {
     };
 }
 
-function addActivity(activityTxt, byMember, item, { _id, title }) {
+function addActivity(txt, byMemberId, taskId, groupId, boardId) {
     return {
         _id: utilService.makeId(),
-        byMember,
-        txt: activityTxt,
-        item,
-        createdAt: Date.now(),
-        boardId: _id,
-        boardTitle: title
+        byMemberId,
+        txt,
+        taskId,
+        groupId,
+        boardId
     }
 }
 

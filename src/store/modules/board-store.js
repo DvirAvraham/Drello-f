@@ -119,8 +119,9 @@ export default {
       if (action?.type === 'members' && (currTask?.members?.length || currTask?.members?.length > task?.members?.length)) return
 
       const currGroup = state.currentBoard.groups[groupIdx];
-      const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, taskTitle: task.title, groupTitle: currGroup.title }, state.currentBoard)
-      if (action?.type === 'members') activity.toMember = action.item;
+      const userId = userService.getLoggedinUser()._id;
+      const activity = boardService.addActivity(activityTxt, userId, currTask?._id, currGroup?._id, state.currentBoard._id)
+      if (action?.type === 'members') activity.toMemberId = action.item._id;
       state.currentBoard.activities.unshift(activity);
       socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
     },
