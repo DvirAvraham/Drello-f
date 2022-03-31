@@ -71,8 +71,8 @@ export default {
     },
     addGroup(state, { group }) {
       state.currentBoard.groups.push(group);
-      const activity = boardService.addActivity('Added group', userService.getLoggedinUser(), { type: 'group', _id: group._id, title: group.title })
-      state.currentBoard.activities.unshift(activity);
+      // const activity = boardService.addActivity('Added group', userService.getLoggedinUser(), { type: 'group', _id: group._id, title: group.title })
+      // state.currentBoard.activities.unshift(activity);
     },
     removeGroup(state, { groupId }) {
       const idx = state.currentBoard.groups.indexOf(group => group._id === groupId);
