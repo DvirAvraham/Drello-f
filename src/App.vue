@@ -45,7 +45,7 @@ export default {
 			let title
 			let message
 			if (activity.toMember?._id) {
-				title = "you've been tagged"
+				title = "You've been tagged"
 				message = byMember + ' just ' + ' tagged you at ' + "'" + itemName + "' at " + boardName + ' board'
 				if (userService.getLoggedinUser()._id === activity.toMember._id) {
 					this.notify(true, title, message)
