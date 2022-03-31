@@ -28,7 +28,8 @@ export default {
   },
   mutations: {
     setLoggedinUser(state, { user }) {
-      socketService.emit('set-user-socket', user._id)
+      if (user) socketService.emit('set-user-socket', user._id);
+      else socketService.emit('unset-user-socket');
       state.loggedinUser = user;
     },
     setUsers(state, { users }) {

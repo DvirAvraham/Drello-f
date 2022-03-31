@@ -118,7 +118,8 @@ export default {
       }
       if (action?.type === 'members' && (currTask?.members?.length || currTask?.members?.length > task?.members?.length)) return
 
-      const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, title: task.title })
+      const currGroup = state.currentBoard.groups[groupIdx];
+      const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, taskTitle: task.title, groupTitle: currGroup.title }, state.currentBoard._id)
       if (action?.type === 'members') activity.toMember = action.item;
       state.currentBoard.activities.unshift(activity);
       socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })

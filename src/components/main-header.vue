@@ -36,6 +36,7 @@
     </div>
 
     <section class="secondery-container flex align-items">
+      <button v-if="user" @click="logout">LOGOUT</button>
       <div class="main-header-input flex" :class="{ focused: isInputFocused }" @click="focusInput">
         <span class="icon-search flex"></span>
         <input
@@ -48,7 +49,7 @@
       <span class="icon icon-info"></span>
       <span class="icon icon-bell"></span>
       <!-- <i class="fa-regular fa-bell notification-header"></i> -->
-      <avatar v-if="member" size="32" color="white" :name="member.fullname" class="avatar-header"></avatar>
+      <avatar v-if="user" size="32" color="white" :name="user.fullname" class="avatar-header"></avatar>
     </section>
   </header>
 </template>
@@ -75,10 +76,14 @@ export default {
     focusInput() {
       this.$refs.headerInput.focus();
       this.isInputFocused = true;
+    },
+    async logout() {
+      await this.$store.dispatch({ type: 'logout' });
+      this.$router.push('/login');
     }
   },
   computed: {
-    member() {
+    user() {
       return this.$store.getters.user;
     },
     isBoard() {

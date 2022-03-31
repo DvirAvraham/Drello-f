@@ -86,9 +86,9 @@ export default {
         },
         toggleLoginSignup() {
             this.isLogin = !this.isLogin;
-            this.fullname = '';
-            this.username = '';
-            this.password = '';
+            // this.user.fullname = '';
+            // this.user.username = '';
+            // this.user.password = '';
         }
     },
     computed: {
