@@ -11,7 +11,7 @@
     <ul>
       <li class="label" v-for="label in getRelevantLabels" :key="label._id">
         <div
-          class="hover"
+          class="label-hover"
           :style="{ 'background-color': label.color }"
           :class="{ 'hover-marker': null }"
         ></div>

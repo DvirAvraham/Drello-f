@@ -121,6 +121,8 @@ export default {
       editIcon: false,
       isQuickEdit: false,
       taskCopy: null,
+      displayLabels: false
+
     };
   },
   mounted() {
@@ -158,7 +160,15 @@ export default {
     openTask() {
       this.closeQuickEdit()
       this.$emit('openTask')
-    }
+    },
+    toggleLabels() {
+      this.$emit('toggleLabels');
+      if (this.displayLabels) this.displayLabels = !this.displayLabels;
+      else
+        setTimeout(() => {
+          this.displayLabels = !this.displayLabels;
+        }, 400);
+    },
   },
   computed: {
 

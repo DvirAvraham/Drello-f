@@ -22,16 +22,17 @@
     border-radius: 0 3px 3px 0;
     cursor: pointer;
     font-weight: 700;
-    margin: 2px 0 4px 6px;
+    // margin: 2px 0 4px 6px;
     min-height: 31px;
     padding: 6px 3px;
     position: relative;
     transition: padding 85ms;
     min-width: 239px;
+    transition: all 0.3s;
   }
 
   & .edit-labels {
-    @include icon("\e927");
+    @include icon('\e927');
     padding: 9px;
     margin-right: -19px;
     z-index: 5;
@@ -71,4 +72,34 @@
 .create-label-btn {
   padding: 6px;
   margin-top: 18px;
+}
+
+.label {
+  transition: all 0.3s;
+
+  &:hover {
+    position: relative;
+
+    .label-hover {
+      left: -2.5%;
+      filter: brightness(0.7);
+      position: relative;
+      height: 31px;
+    }
+
+    .label-txt {
+      // padding-left: 7px;
+      position: absolute;
+      width: 100.5%;
+
+      // left: -1.5%;
+      span {}
+    }
+  }
+
+  .label-hover {
+    width: 10px;
+    height: 32px;
+    border-radius: 3px 0 0 3px;
+  }
 }
