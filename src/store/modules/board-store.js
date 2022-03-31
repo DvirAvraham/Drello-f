@@ -119,7 +119,7 @@ export default {
       if (action?.type === 'members' && (currTask?.members?.length || currTask?.members?.length > task?.members?.length)) return
 
       const currGroup = state.currentBoard.groups[groupIdx];
-      const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, taskTitle: task.title, groupTitle: currGroup.title }, state.currentBoard._id)
+      const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, taskTitle: task.title, groupTitle: currGroup.title }, state.currentBoard)
       if (action?.type === 'members') activity.toMember = action.item;
       state.currentBoard.activities.unshift(activity);
       socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
@@ -183,6 +183,11 @@ export default {
     },
     async setBoardPrefs({ state, commit, dispatch }, { key, val }) {
       try {
+        if (key === 'members') {
+          const user = userService.getLoggedinUser();
+
+          // const activity = boardService.addActivity(`${user.}`, userService.getLoggedinUser(), { type: 'task', _id: task._id, taskTitle: task.title, groupTitle: currGroup.title }, state.currentBoard._id)
+        }
         commit({ type: 'updateBoard', key, val });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
         // commit({ type: 'setCurrentBoard', board: savedBoard });
