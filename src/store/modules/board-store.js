@@ -183,7 +183,7 @@ export default {
     },
     async setBoardPrefs({ state, commit, dispatch }, { key, val }) {
       try {
-        console.log(key, val)
+
         if (key === 'members') {
           const user = userService.getLoggedinUser();
           const newMember = val[val.length - 1];

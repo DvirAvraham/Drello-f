@@ -36,7 +36,7 @@
     </div>
 
     <section class="secondery-container flex align-items">
-      <button v-if="user" @click="logout">LOGOUT</button>
+      <!-- <button v-if="user" @click="logout">LOGOUT</button> -->
       <div class="main-header-input flex" :class="{ focused: isInputFocused }" @click="focusInput">
         <span class="icon-search flex"></span>
         <input
