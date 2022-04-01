@@ -6,11 +6,11 @@
   border-radius: $border-rsize;
   box-shadow: 0 1px 0 #091e4240;
   line-height: 20px;
-  position: relative;
   background-size: cover;
   background-position: 50%;
   background-repeat: no-repeat;
   position: relative;
+
   & .title {
     word-break: break-word;
   }
@@ -52,6 +52,7 @@
     justify-content: center;
     border-radius: 3px;
     z-index: 2;
+
     &:hover {
       background-color: #ebecf0;
     }
@@ -103,12 +104,12 @@
 
 .dragging {
   transition: transform 0.18s ease;
-  transform: rotateZ(5deg);
+  transform: rotate(5deg);
 }
 
 .dropping {
   transition: transform 0.18s ease-in-out;
-  transform: rotateZ(0deg);
+  transform: rotate(0deg);
 }
 
 .preview-icon {
