@@ -1,5 +1,5 @@
 <template>
-	<section v-if="currBoard" class="board-container" :style="boardStyle">
+	<section v-if="currBoard" class="board-container">
 		<board-header
 			@setBg="setBg"
 			:board="currBoard"
