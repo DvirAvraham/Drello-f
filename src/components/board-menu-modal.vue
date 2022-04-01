@@ -31,13 +31,13 @@
       <ul>
         <li class="activity" v-for="activity in board.activities" :key="activity._id">
           <div>
-            <avatar size="32" :name="activity.byMember.fullname"></avatar>
+            <avatar size="32" :name="getMember(activity.byMemberId).fullname"></avatar>
           </div>
           <div class="activity-content">
-            <span class="member-name">{{ activity.byMember.fullname }}</span>
+            <span class="member-name">{{ getMember(activity.byMemberId).fullname }}</span>
             <span>{{ activity.txt }}</span>
             <div>
-              <timeago class="time" :datetime="activity.createdAt" />
+              <!-- <timeago class="time" :datetime="activity.createdAt" /> -->
             </div>
           </div>
         </li>
@@ -51,6 +51,7 @@
 import changeBg from './board-menu-change-bg.vue'
 import bgPhotos from './background-photos.vue'
 import colorPicker from './color-picker.vue';
+import { userService } from '../services/user-service.js';
 export default {
   props: {
     isOpen: Boolean,
@@ -58,10 +59,12 @@ export default {
   },
   data() {
     return {
-      currSection: 'Menu'
+      currSection: 'Menu',
+      boardUsers: null,
     }
   },
   created() {
+    this.board.activities
   },
   unmounted() {
     this.currSection = 'Menu'
@@ -86,12 +89,20 @@ export default {
     },
     setBgColor(color) {
       this.$emit('setBgColor')
+    },
+    getMember(id) {
+      const user = this.users.find(user => user._id === id);
+      console.log(user)
+      return user
     }
 
   },
   computed: {
     boardBgStyle() {
       return { 'background-color': this.board.style.bgColor, 'background-image': 'url(' + this.board.style.bgImg + ')' }
+    },
+    users() {
+      return this.$store.getters.getAllUsers
     }
   },
   components: {

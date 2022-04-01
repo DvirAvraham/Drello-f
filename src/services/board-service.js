@@ -44,7 +44,8 @@ function addActivity(txt, byMemberId, taskId, groupId, boardId) {
         txt,
         taskId,
         groupId,
-        boardId
+        boardId,
+        createdAt: Date.now()
     }
 }
 
