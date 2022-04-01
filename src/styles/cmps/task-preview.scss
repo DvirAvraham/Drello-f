@@ -100,10 +100,17 @@
   margin: 0 7px 8px 8px;
   line-height: 20px;
 }
+
 .dragging {
-  transform: rotate(5deg);
-  pointer-events: none;
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg);
 }
+
+.dropping {
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg);
+}
+
 .preview-icon {
   @include taskPreviewIcon();
   p {

@@ -5,6 +5,8 @@
     orientation="horizontal"
     drag-handle-selector=".group-title"
     drag-class="dragging"
+    drop-class="dropping"
+    :animation-duration="0"
     @drop="onColumnDrop($event)"
   >
     <Draggable class v-for="(group, idx) in scene.groups" :key="group._id">
@@ -23,14 +25,13 @@
           orientation="vertical"
           group-name="col-items"
           non-drag-area-selector=".on-quick-edit"
-          :shouldAcceptDrop="
-            (e, payload) => e.groupName === 'col-items' && !payload.loading
-          "
           :get-child-payload="getCardPayload(group._id)"
           :drop-placeholder="{
-            className: `drag-placeholder-task`,
+            className: `drag-placeholder-task`
           }"
           drag-class="dragging"
+          drop-class="dropping"
+          :animation-duration="0"
           @drop="(e) => onCardDrop(group._id, e)"
         >
           <!-- tasks -->
