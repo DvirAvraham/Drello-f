@@ -383,13 +383,11 @@ export default {
       this.onTaskEdit();
     },
     onTaskEdit(action = null) {
-      // console.log('this.taskToEdit', this.taskToEdit);
       this.$store.dispatch({
         type: 'setTask',
         task: JSON.parse(JSON.stringify(this.taskToEdit)),
         action
       });
-      console.log('this.acttttttttttttttttttttttttttttion', this.taskToEdit)
       this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
     },
     async updateLabels(updatedLabels, item) {

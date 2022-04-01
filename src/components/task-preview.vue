@@ -134,7 +134,6 @@ export default {
   },
   created() {
     this.taskCopy = JSON.parse(JSON.stringify(this.task))
-    console.log('this.taskCopy, this.task', this.taskCopy, this.task)
   },
   components: {
     Draggable,
@@ -145,21 +144,17 @@ export default {
       var taskDup = JSON.parse(JSON.stringify(this.task))
       if (taskDup.status === '' || !taskDup.status) {
         taskDup.status = 'completed'
-        console.log(2, taskDup.status);
       }
       else if (taskDup.status === 'completed') {
         if (Date.now() > taskDup.dueDate) {
           taskDup.status = 'overdue'
-          console.log(3, taskDup.status);
         }
         else {
           taskDup.status = ''
-          console.log(4, taskDup.status);
         }
       }
       else if (taskDup.status === 'overdue') {
         taskDup.status = 'completed'
-        console.log(5, taskDup.status);
       }
       this.updateTask(taskDup)
     },
@@ -184,7 +179,6 @@ export default {
     updateTask(editedTask = this.taskCopy) {
       this.$emit('updateTask', JSON.parse(JSON.stringify(editedTask)))
       this.taskCopy = JSON.parse(JSON.stringify(this.task))
-      console.log('this.taskCopy', this.taskCopy)
     },
     openTask() {
       this.closeQuickEdit()

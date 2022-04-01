@@ -112,7 +112,6 @@ export default {
             this.$emit('closeFilter')
         },
         setFilter() {
-            console.log(this.filter)
             this.$emit('setFilter', { ...this.filterBy })
         },
     },

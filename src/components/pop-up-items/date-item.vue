@@ -23,7 +23,6 @@ export default {
     updateStatus() {
       var status = ''
       if ((Date.parse((this.date))) < Date.now()) status = 'overdue'
-      console.log('statussssssssssssssssss', status)
       const item = {
         type: 'status',
         item: status

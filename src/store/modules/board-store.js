@@ -144,8 +144,6 @@ export default {
         socketService.off('board update')
         socketService.on('board update', board => {
           if (board._id === state.currentBoard?._id) {
-            // commit({ type: 'saveBoard', board });
-            console.log(board);
             commit({ type: 'setCurrentBoard', board });
           }
         })
