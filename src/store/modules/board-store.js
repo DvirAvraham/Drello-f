@@ -188,12 +188,12 @@ export default {
     },
     async setBoardPrefs({ state, commit, dispatch }, { key, val }) {
       try {
-
         if (key === 'members') {
           const user = userService.getLoggedinUser();
           const newMember = val[val.length - 1];
-          const activity = boardService.addActivity(`${user.fullname} invited you to board ${state.currentBoard.title}`, user, { type: 'board', _id: state.currentBoard._id }, state.currentBoard._id)
-          activity.toMember = newMember;
+          // txt, byMemberId, taskId, groupId, boardId
+          const activity = boardService.addActivity(`invited you to board`, user._id, null, null, state.currentBoard._id)
+          activity.toMemberId = newMember._id;
           socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
         }
         commit({ type: 'updateBoard', key, val });

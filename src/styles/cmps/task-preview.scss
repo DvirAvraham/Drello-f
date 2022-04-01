@@ -113,6 +113,11 @@
   transform: rotate(0deg);
 }
 
+.location-input{
+  @include popupInput();
+
+}
+
 .preview-icon {
   @include taskPreviewIcon();
   p {

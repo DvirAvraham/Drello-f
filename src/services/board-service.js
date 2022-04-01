@@ -45,7 +45,8 @@ function addActivity(txt, byMemberId, taskId, groupId, boardId) {
         taskId,
         groupId,
         boardId,
-        createdAt: Date.now()
+        createdAt: Date.now(),
+        isReaden: false,
     }
 }
 

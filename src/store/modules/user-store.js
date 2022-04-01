@@ -6,7 +6,8 @@ import { socketService } from '../../services/socket-service'
 export default {
   state: {
     loggedinUser: userService.getLoggedinUser(),
-    allUsers: []
+    allUsers: [],
+    userActivities: userService.getLoggedinUser().activities
   },
   getters: {
     user(state) {
@@ -25,6 +26,9 @@ export default {
       };
       return miniUser;
     },
+    userActivities(state) {
+      return state.userActivities
+    }
   },
   mutations: {
     setLoggedinUser(state, { user }) {
@@ -38,6 +42,10 @@ export default {
     addRecentBoard(state, { boardId }) {
       const user = userService.addRecentBoard(boardId);
       state.loggedinUser = user;
+    },
+    updateActivities(state, { activity }) {
+      console.log(activity)
+      state.userActivities.unshift(activity)
     }
   },
   actions: {

@@ -9,6 +9,7 @@
 import appHeader from './components/main-header.vue'
 import { socketService } from './services/socket-service';
 import { userService } from './services/user-service.js';
+import { boardService } from './services/board-service.js';
 import { ElNotification } from 'element-plus'
 
 
@@ -46,23 +47,31 @@ export default {
 				type: 'info',
 			})
 		},
-		notifyActivity(activity) {
+		async notifyActivity(activity) {
 			console.log('activity', activity)
 			// let toMember = ''
-			const itemName = activity.item?.taskTitle || activity.item?.taskGroup
+			// const itemName = activity.item?.taskTitle || activity.item?.taskGroup
 			let title
 			let message
 			const byMember = this.getMemberById(activity.byMemberId).fullname
-			const board = this.getBoardById(activity.boardId)
+			let board = this.getBoardById(activity.boardId)
+			if (!board) board = await boardService.getBoardById(activity.boardId)
 			if (activity.toMemberId) {
-				title = "You've been tagged"
-				message = byMember + ' just ' + ' tagged you at ' + "'" + "' at " + `<a href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				if (!activity.groupId) {
+					title = "You've been added to a new board !"
+					message = byMember + ` just added you to a new board ` + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				} else {
+					title = "You've been tagged"
+					message = byMember + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				}
 				if (userService.getLoggedinUser()._id === activity.toMemberId) {
+					this.$store.commit({ type: 'updateActivities', activity })
 					this.notify(true, title, message)
 				}
 			} else {
 				title = activity.txt
-				message = byMember + ' just ' + title + ' to ' + `<a href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				message = byMember + ' just ' + title + ' to ' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				this.$store.commit({ type: 'updateActivities', activity })
 				this.notify(null, title, message)
 			}
 		},
