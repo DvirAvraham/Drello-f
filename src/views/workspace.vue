@@ -44,6 +44,7 @@ export default {
 			return this.boards.filter(board => !board.isFavorite)
 		},
 		recentBoards() {
+			if (!this.boards.length) return [];
 			return this.user.recentBoards.map(boardId => this.boards.find(board => board._id === boardId))
 		}
 	},
