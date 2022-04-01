@@ -66,6 +66,9 @@ export default {
 	},
 	async created() {
 		await this.loadBoard()
+		if (!this.boards || !this.boards.length) {
+			await this.$store.dispatch({ type: 'loadBoards' })
+		}
 		// this.board = this.currBoard;
 		// const { boardId } = this.$route.params;
 		// socketService.emit("board topic", boardId);
@@ -161,6 +164,9 @@ export default {
 		},
 		currBoard() {
 			return this.$store.getters.currBoard;
+		},
+		boards() {
+			return this.$store.getters.boards;
 		},
 		groupsToDisplay() {
 			let filteredGroups = [];
