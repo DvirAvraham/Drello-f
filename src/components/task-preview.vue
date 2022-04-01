@@ -37,7 +37,10 @@
           cols="30"
           rows="10"
         ></textarea>
-        <div class="icons">
+        <div
+          class="icons"
+          v-if="task.status?.length || numOfComments || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length"
+        >
           <div
             class="icon-container flex"
             v-if="this.task.cover?.type !== 'inline'"

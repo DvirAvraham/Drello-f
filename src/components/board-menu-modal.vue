@@ -23,16 +23,22 @@
     <change-bg @setBg="setBg" @changeCmp="changeCmp" v-if="currSection === 'changeBg'"></change-bg>
     <bg-photos @setBg="setBg" v-if="currSection === 'bgPhotos'"></bg-photos>
     <color-picker class="wide" @updateColor="setBg" v-if="currSection === 'colorPicker'"></color-picker>
-    <section>
+    <section class="activities" v-if="currSection === 'Menu'">
+      <div class="logo">
+        <span class="icon-activity"></span>
+        <p>Activity</p>
+      </div>
       <ul>
-        <li v-for="activity in board.activities" :key="activity._id">
+        <li class="activity" v-for="activity in board.activities" :key="activity._id">
           <div>
-            <avatar class="activity-avatar" size="32" :name="activity.byMember.fullname"></avatar>
-            <span>{{ activity.byMember.fullname }} -</span>
-            <span>{{ activity.txt }}</span>
+            <avatar size="32" :name="getMember(activity.byMemberId).fullname"></avatar>
           </div>
-          <div>
-            <timeago class="time" :datetime="activity.createdAt" />
+          <div class="activity-content">
+            <span class="member-name">{{ getMember(activity.byMemberId).fullname }}</span>
+            <span>{{ activity.txt }}</span>
+            <div>
+              <timeago class="time" :datetime="activity.createdAt" />
+            </div>
           </div>
         </li>
       </ul>
@@ -45,6 +51,7 @@
 import changeBg from './board-menu-change-bg.vue'
 import bgPhotos from './background-photos.vue'
 import colorPicker from './color-picker.vue';
+import { userService } from '../services/user-service.js';
 export default {
   props: {
     isOpen: Boolean,
@@ -52,10 +59,12 @@ export default {
   },
   data() {
     return {
-      currSection: 'Menu'
+      currSection: 'Menu',
+      boardUsers: null,
     }
   },
   created() {
+    this.board.activities
   },
   unmounted() {
     this.currSection = 'Menu'
@@ -80,12 +89,20 @@ export default {
     },
     setBgColor(color) {
       this.$emit('setBgColor')
+    },
+    getMember(id) {
+      const user = this.users.find(user => user._id === id);
+      console.log(user)
+      return user
     }
 
   },
   computed: {
     boardBgStyle() {
       return { 'background-color': this.board.style.bgColor, 'background-image': 'url(' + this.board.style.bgImg + ')' }
+    },
+    users() {
+      return this.$store.getters.getAllUsers
     }
   },
   components: {

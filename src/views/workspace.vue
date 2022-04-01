@@ -2,12 +2,15 @@
     <section class="workspace-container main-layout">
         <h2>Workspace</h2>
 
-		<h3>Starred Boards</h3>
+		<h3><span class="icon-member"></span>Starred Boards</h3>
         <board-list @toggleFavorite="toggleFavorite" :boards="starredBoards"></board-list>
 
-		<h3>Other Boards</h3>
-		<board-list @toggleFavorite="toggleFavorite" :boards="otherBoards"></board-list>
-		
+		<h3><span class="icon-member"></span>Recent Boards</h3>
+		<board-list @toggleFavorite="toggleFavorite" :boards="recentBoards"></board-list>
+
+		<h3><span class="icon-members"></span>All boards in this Workspace</h3>
+		<board-list @toggleFavorite="toggleFavorite" :boards="boards"></board-list>
+
     </section>
 </template>
 <script>
@@ -28,6 +31,9 @@ export default {
 		}
 	},
 	computed: {
+		user() {
+			return this.$store.getters.user;
+		},
 		boards() {
 			return this.$store.getters.boards
 		},
@@ -37,6 +43,10 @@ export default {
 		otherBoards() {
 			return this.boards.filter(board => !board.isFavorite)
 		},
+		recentBoards() {
+			if (!this.boards.length) return [];
+			return this.user.recentBoards.map(boardId => this.boards.find(board => board._id === boardId))
+		}
 	},
 	components: {
 		workspaceFilter,

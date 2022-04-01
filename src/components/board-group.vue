@@ -5,7 +5,8 @@
     orientation="horizontal"
     drag-handle-selector=".group-title"
     drag-class="dragging"
-    @drop="onColumnDrop($event)"
+    drop-class="dropping"
+    @drop="onGroupDrop($event)"
   >
     <Draggable class v-for="(group, idx) in scene.groups" :key="group._id">
       <section class="group-container">
@@ -23,15 +24,14 @@
           orientation="vertical"
           group-name="col-items"
           non-drag-area-selector=".on-quick-edit"
-          :shouldAcceptDrop="
-            (e, payload) => e.groupName === 'col-items' && !payload.loading
-          "
           :get-child-payload="getCardPayload(group._id)"
           :drop-placeholder="{
-            className: `drag-placeholder-task`,
+            className: `drag-placeholder-task`
           }"
           drag-class="dragging"
-          @drop="(e) => onCardDrop(group._id, e)"
+          drop-class="dropping"
+          :animation-duration="0"
+          @drop="(e) => onTaskDrop(group._id, e)"
         >
           <!-- tasks -->
           <task-preview
@@ -162,38 +162,27 @@ export default {
       }
       return result;
     },
-    onColumnDrop(dropResult) {
+    onGroupDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
       scene.groups = this.applyDrag(scene.groups, dropResult);
       this.scene = scene;
       this.$emit('columnChange', this.scene.groups);
     },
-    onCardDrop(columnId, dropResult) {
+    onTaskDrop(groupId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
         const scene = Object.assign({}, this.scene);
-        const column = scene.groups.filter((p) => p._id === columnId)[0];
-        const itemIndex = scene.groups.indexOf(column);
-        const newColumn = Object.assign({}, column);
-        // check if element was ADDED in current column
-        if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
-          // your action / api call
-          // dropResult.payload.loading = true
-          // simulate api call
-          // setTimeout(function () { dropResult.payload.loading = false }, (Math.random() * 5000) + 1000);
-        }
-        newColumn.tasks = this.applyDrag(newColumn.tasks, dropResult);
-        // this.$emit('groupChange', {idx: itemIndex, newCol: newColumn})
-        // this.$store.dispatch({ type: 'groupDND', groupIdx: itemIndex, newGroup: newColumn });
-        // this.$emit('drop', {idx: itemIndex, newColumn});
-        // scene.groups.splice(itemIndex, 1, newColumn)
-        // this.scene = scene
-        this.$emit('taskChange', { groupIdx: itemIndex, newGroup: newColumn })
+        const group = scene.groups.filter((p) => p._id === groupId)[0];
+        const groupIdx = scene.groups.indexOf(group);
+        const newGroup = Object.assign({}, group);
+
+        newGroup.tasks = this.applyDrag(newGroup.tasks, dropResult);
+        this.$emit('taskChange', { groupIdx, newGroup })
       }
     },
-    getCardPayload(columnId) {
+    getCardPayload(groupId) {
       return (index) => {
-        return this.scene.groups.filter((p) => p._id === columnId)[0].tasks[
+        return this.scene.groups.filter((p) => p._id === groupId)[0].tasks[
           index
         ];
       };

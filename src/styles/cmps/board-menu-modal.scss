@@ -3,13 +3,27 @@
   position: fixed;
   right: 0;
   top: 44px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 44px);
   background-color: #f4f5f7;
   padding: 15px 10px 10px 10px;
   width: 340px;
   transition: all 0.3s;
   color: #091e42;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track-piece {
+    border-radius: $border-rsize;
+    background: $scroll-y-bg-clr;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border-radius: $border-rsize;
+    background: $scroll-y-clr;
+  }
 
   header {
     padding-bottom: 10px;

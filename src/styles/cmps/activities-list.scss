@@ -23,8 +23,9 @@
 }
 
 .activity {
-    margin-bottom: 5px;
-    margin-top: 20px;
+    margin-bottom: 10px;
+        display: flex;
+    gap: 5px;
     & .member {
         font-weight: 700;
         margin-inline-end: 10px;
@@ -34,7 +35,7 @@
         font-weight: 400;
         white-space: pre;
         color: #5e6c84;
-    }
+    } 
 }
 
 .activity-avatar {

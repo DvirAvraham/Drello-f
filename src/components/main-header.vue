@@ -37,19 +37,36 @@
 
     <section class="secondery-container flex align-items">
       <!-- <button v-if="user" @click="logout">LOGOUT</button> -->
-      <div class="main-header-input flex" :class="{ focused: isInputFocused }" @click="focusInput">
-        <span class="icon-search flex"></span>
+      <div class="main-header-input flex" :class="{ focused: isInputFocused }">
+        <span class="icon-search flex" @click="focusInput"></span>
         <input
-          v-model="search"
+          v-model="filterBy.title"
           @blur="isInputFocused = false;"
           ref="headerInput"
-          placeholder="Search"
+          placeholder="Search boards..."
+          @click="focusInput"
         />
+        <board-search v-click-outside="toggleBoardSearch" v-if="isBoardSearch" :filterBy="filterBy"></board-search>
       </div>
       <span class="icon icon-info"></span>
       <span class="icon icon-bell"></span>
       <!-- <i class="fa-regular fa-bell notification-header"></i> -->
-      <avatar v-if="user" size="32" color="white" :name="user.fullname" class="avatar-header"></avatar>
+      <div class="user">
+        <avatar
+          @click="toggleUserModal"
+          v-if="user"
+          size="32"
+          color="white"
+          :name="user.fullname"
+          class="avatar-header"
+        ></avatar>
+        <user-modal
+          v-click-outside="toggleUserModal"
+          :user="user"
+          @closeModal="toggleUserModal"
+          v-if="isUserModal"
+        ></user-modal>
+      </div>
     </section>
   </header>
 </template>
@@ -59,14 +76,25 @@
 import { Search } from '@element-plus/icons-vue';
 import createBoard from './create-board.vue';
 import Avatar from 'vue3-avatar';
-
+import userModal from './board-header/user-modal.vue';
+import boardSearch from './board-search.vue'
 export default {
+  props: {
+    boards: Array
+  },
+  created() {
+  },
   data() {
     return {
       search: '',
       isCreateBoard: false,
       isInputFocused: false,
       Search,
+      isUserModal: false,
+      isBoardSearch: false,
+      filterBy: {
+        title: ''
+      }
     };
   },
   methods: {
@@ -76,10 +104,17 @@ export default {
     focusInput() {
       this.$refs.headerInput.focus();
       this.isInputFocused = true;
+      this.toggleBoardSearch();
     },
     async logout() {
       await this.$store.dispatch({ type: 'logout' });
       this.$router.push('/login');
+    },
+    toggleUserModal() {
+      this.isUserModal = !this.isUserModal
+    },
+    toggleBoardSearch() {
+      this.isBoardSearch = !this.isBoardSearch
     }
   },
   computed: {
@@ -88,11 +123,14 @@ export default {
     },
     isBoard() {
       return this.$store.getters.currBoard
-    }
+    },
+
   },
   components: {
     createBoard,
     Avatar,
+    userModal,
+    boardSearch
   },
 };
 </script>
