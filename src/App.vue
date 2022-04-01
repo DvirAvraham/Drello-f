@@ -17,8 +17,12 @@ export default {
 	async created() {
 		socketService.off('notify activity')
 		socketService.on('notify activity', this.notifyActivity)
-		await this.$store.dispatch({ type: 'loadUsers' })
-		if (this.miniUser) socketService.emit('set-user-socket', this.miniUser._id)
+		try {
+			await this.$store.dispatch({ type: 'loadUsers' })
+			if (this.miniUser) socketService.emit('set-user-socket', this.miniUser._id)
+		} catch (err) {
+			console.log(err)
+		}
 	},
 	methods: {
 		notify(isPrivate = null, title, message) {
