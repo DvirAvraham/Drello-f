@@ -29,21 +29,23 @@
                         @updateItem="updateItem"
                     />
                 </div>
-                <button
-                    v-if="activity.isEditing"
-                    class="close-comment-edit"
-                    @click="updateItem(activity._id, false)"
-                ></button>
+                <div class="comment-btns">
+                    <button
+                        v-if="activity.isEditing"
+                        class="close-comment-edit"
+                        @click="updateItem(activity._id, false)"
+                    ></button>
 
-                <a
-                    v-if="!activity.isEditing && user._id === activity.byMember._id"
-                    @click="(isEditing = true), (updateItem(activity._id, true))"
-                >Edit</a>
-                <span v-if="!activity.isEditing && user._id === activity.byMember._id">-</span>
-                <a
-                    v-if="!activity.isEditing && user._id === activity.byMember._id"
-                    @click="deleteItem(activity._id)"
-                >Delete</a>
+                    <a
+                        v-if="!activity.isEditing && user._id === activity.byMember._id"
+                        @click="(isEditing = true), (updateItem(activity._id, true))"
+                    >Edit</a>
+                    <span v-if="!activity.isEditing && user._id === activity.byMember._id">-</span>
+                    <a
+                        v-if="!activity.isEditing && user._id === activity.byMember._id"
+                        @click="deleteItem(activity._id)"
+                    >Delete</a>
+                </div>
             </li>
         </ul>
     </section>

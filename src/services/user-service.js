@@ -10,7 +10,8 @@ export const userService = {
   getLoggedinUser,
   getUsers,
   getUserById,
-  getGuestUser
+  getGuestUser,
+  addRecentBoard
 };
 
 function getUsers() {
@@ -37,6 +38,17 @@ async function signup(cred) {
 function logout() {
   sessionStorage.removeItem(LOGGEDIN_USER_KEY);
   return httpService.post(ENDPOINT + '/logout');
+}
+
+function addRecentBoard(boardId) {
+  const user = getLoggedinUser();
+  if (user.recentBoards.includes(boardId)) {
+    const idx = user.recentBoards.findIndex(id => id === boardId)
+    user.recentBoards.splice(idx, 1);
+  }
+  user.recentBoards.unshift(boardId);
+  user.recentBoards = user.recentBoards.slice(0, 5);
+  return _saveLocalUser(user);
 }
 
 function getGuestUser() {

@@ -1,20 +1,8 @@
 <template>
-    <h3>Starred Boards</h3>
     <ul class="board-list">
         <board-preview
+            v-for="board in boards"
             @toggleFavorite="toggleFavorite"
-            v-for="board in starredBoards"
-            :board="board"
-            :key="board._id"
-            @click="moveToBoard(board._id)"
-        />
-    </ul>
-
-    <h3>Other Boards</h3>
-    <ul class="board-list">
-        <board-preview
-            @toggleFavorite="toggleFavorite"
-            v-for="board in unStarredBoards"
             :board="board"
             :key="board._id"
             @click="moveToBoard(board._id)"
@@ -43,16 +31,7 @@ export default {
         },
         toggleFavorite(id) {
             this.$emit('toggleFavorite', id);
-
         }
-    },
-    computed: {
-        starredBoards() {
-            return this.boards.filter(board => board.isFavorite)
-        },
-        unStarredBoards() {
-            return this.boards.filter(board => !board.isFavorite)
-        },
     },
     components: {
         boardPreview

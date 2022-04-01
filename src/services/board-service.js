@@ -37,15 +37,14 @@ function getEmptyGroup(title = '', tasks = []) {
     };
 }
 
-function addActivity(activityTxt, byMember, item, { _id, title }) {
+function addActivity(txt, byMemberId, taskId, groupId, boardId) {
     return {
         _id: utilService.makeId(),
-        byMember,
-        txt: activityTxt,
-        item,
-        createdAt: Date.now(),
-        boardId: _id,
-        boardTitle: title
+        byMemberId,
+        txt,
+        taskId,
+        groupId,
+        boardId
     }
 }
 
@@ -59,32 +58,32 @@ function getEmptyBoard() {
         },
         labels: [
             {
-                "color": "#f5dd29",
+                "color": "rgb(0, 121, 191)",
                 "title": "Day",
                 "_id": "l102"
             },
             {
-                "color": "#a7ffeb",
+                "color": "rgb(210, 144, 52)",
                 "title": "Remarket",
                 "_id": "l103"
             },
             {
-                "color": "#d7aefb",
+                "color": "rgb(81, 152, 57)",
                 "title": "Demand Marketing",
                 "_id": "enT4D7oh"
             },
             {
-                "color": "#33a9bb",
+                "color": "rgb(176, 70, 50)",
                 "title": "Partners",
                 "_id": "rtbnYyfi"
             },
             {
-                "color": "#16243d",
+                "color": "rgb(137, 96, 158)",
                 "title": "Government",
                 "_id": "5leaLS2n"
             },
             {
-                "color": "#f28b82",
+                "color": "rgb(205, 90, 145)",
                 "title": "Planning",
                 "_id": "NuwdhQ9L"
             }

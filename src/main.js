@@ -11,7 +11,6 @@ import vClickOutside from "click-outside-vue3";
 import timeago from 'vue-timeago3';
 import GAuth from 'vue3-google-oauth2';
 import VueGoogleMaps from '@fawmi/vue-google-maps';
-import DKToast from 'vue-dk-toast';
 
 const app = createApp(App).component('avatar', Avatar);
 app.directive('focus', focusDirective);
@@ -25,7 +24,6 @@ app.use(router);
 app.use(store);
 app.use(ElementPlus);
 app.use(timeago);
-app.use(DKToast);
 app.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyDxg1BG-_6y4c06PrVYvHH76q51dKWkOGs',
