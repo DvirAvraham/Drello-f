@@ -35,6 +35,11 @@ export default {
     setUsers(state, { users }) {
       state.allUsers = users;
     },
+    addRecentBoard(state, { boardId }) {
+      const user = userService.addRecentBoard(boardId);
+      state.loggedinUser = user;
+      console.log(user);
+    }
   },
   actions: {
     async loadUsers({ commit, state }) {
@@ -72,6 +77,6 @@ export default {
         console.log(err);
         throw err;
       }
-    },
+    }
   },
 };

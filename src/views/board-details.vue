@@ -71,31 +71,19 @@ export default {
 		// socketService.emit("board topic", boardId);
 
 		// socketService.on('board update', this.loadBoard())
-		socketService.on('tag user', this.tagUser)
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
 	},
 	methods: {
-		tagUser(activity) {
-			this.$toast(activity.txt, {
-				duration: 2000,
-				styles: {
-					top: '90px',
-					right: '90px',
-					position: 'absolute',
-				},
-				class: 'toast',
-				positionX: 'left',
-				positionY: 'top',
-			});
-		},
 		async loadBoard() {
 			try {
+				const boardId = this.$route.params.boardId;
 				await this.$store.dispatch({
 					type: 'setCurrentBoard',
-					boardId: this.$route.params.boardId,
+					boardId,
 				});
+				this.$store.commit({ type: 'addRecentBoard', boardId })
 				this.board = null;
 				await nextTick();
 			} catch (err) {
