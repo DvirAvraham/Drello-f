@@ -22,7 +22,7 @@
         </div>
     </section>
 </template>
-<script>import { isThisHour } from 'date-fns';
+<script>
 
 export default {
     name: 'board-serach',

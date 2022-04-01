@@ -37,7 +37,7 @@
             <span class="member-name">{{ getMember(activity.byMemberId).fullname }}</span>
             <span>{{ activity.txt }}</span>
             <div>
-              <!-- <timeago class="time" :datetime="activity.createdAt" /> -->
+              <timeago class="time" :datetime="activity.createdAt" />
             </div>
           </div>
         </li>
