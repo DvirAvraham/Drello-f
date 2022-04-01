@@ -331,7 +331,6 @@ export default {
         if (!this.taskToEdit.activities) this.taskToEdit.activities = [];
         this.taskToEdit.activities.unshift(item.item);
       } else if (item.type === 'dueDate') {
-        if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
         this.taskToEdit.dueDate = item.item;
         this.onTaskEdit();
         this.closePopup();
@@ -390,6 +389,7 @@ export default {
         task: JSON.parse(JSON.stringify(this.taskToEdit)),
         action
       });
+      console.log('this.acttttttttttttttttttttttttttttion', this.taskToEdit)
       this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
     },
     async updateLabels(updatedLabels, item) {

@@ -132,7 +132,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: -2px;
+    margin-right: -1px;
     & .member {
       margin-left: 6px;
     }
@@ -195,4 +196,27 @@
 
 .on-quick-edit {
   z-index: 10;
+}
+
+.icon-emptyBox{
+  @include icon ('\e918');
+  display: none;
+}
+
+.duedate {
+  cursor: pointer;
+  & .icon-checklist{
+    display: none;
+  }
+}
+
+
+.duedate:hover{
+  .clock-icon{
+    display: none;
+  }
+.icon-checklist,
+.icon-emptyBox{
+  display: block
+}
 }

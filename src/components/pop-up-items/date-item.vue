@@ -20,12 +20,23 @@ export default {
   },
 
   methods: {
+    updateStatus() {
+      var status = ''
+      if ((Date.parse((this.date))) < Date.now()) status = 'overdue'
+      console.log('statussssssssssssssssss', status)
+      const item = {
+        type: 'status',
+        item: status
+      }
+      this.$emit('addItem', item)
+    },
     saveDueDate() {
       const date = {
         type: 'dueDate',
         item: (Date.parse((this.date))),
       }
       this.$emit('addItem', date);
+      this.updateStatus()
     }
   }
 };
