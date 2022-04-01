@@ -38,7 +38,6 @@ export default {
     addRecentBoard(state, { boardId }) {
       const user = userService.addRecentBoard(boardId);
       state.loggedinUser = user;
-      console.log(user);
     }
   },
   actions: {

@@ -18,9 +18,7 @@ export default {
 		socketService.off('notify activity')
 		socketService.on('notify activity', this.notifyActivity)
 		await this.$store.dispatch({ type: 'loadUsers' })
-		if (!this.miniUser) await this.$store.dispatch({ type: 'login', cred: userService.getGuestUser() });
-		else socketService.emit('set-user-socket', this.miniUser._id)
-		await this.$store.dispatch({ type: 'loadBoards' })
+		if (this.miniUser) socketService.emit('set-user-socket', this.miniUser._id)
 	},
 	methods: {
 		notify(isPrivate = null, title, message) {
