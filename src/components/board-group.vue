@@ -7,6 +7,7 @@
     non-drag-area-selector=".group-edit-popup"
     drag-class="dragging"
     drop-class="dropping"
+    :animation-duration="0"
     @drop="onGroupDrop($event)"
   >
     <Draggable class v-for="(group, idx) in scene.groups" :key="group._id">
