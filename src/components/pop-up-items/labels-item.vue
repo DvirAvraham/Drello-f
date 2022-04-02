@@ -9,7 +9,7 @@
     />
     <h3>Labels</h3>
     <ul>
-      <li class="label" v-for="label in getRelevantLabels" :key="label._id">
+      <li class="label" v-for="label in relevantLabels" :key="label._id">
         <div
           class="label-hover"
           :style="{ 'background-color': label.color }"
@@ -19,7 +19,10 @@
           @click="addLabel(label._id)"
           :style="{ 'background-color': label.color }"
           class="label-txt"
-        >{{ label.title }}</span>
+        >
+          {{ label.title }}
+          <span class="icon-complete" v-if="userLabelIds.includes(label._id)"></span>
+        </span>
         <span
           @click.stop="updateCurrData(label), (isCreating = true)(isEditing = true)"
           class="edit-labels"
@@ -61,7 +64,11 @@ export default {
     };
   },
   computed: {
-    getRelevantLabels() {
+    userLabelIds() {
+      return this.$store.getters.currTask?.labelIds;
+
+    },
+    relevantLabels() {
       let labels = JSON.parse(JSON.stringify(this.boardLabels));
       const regex = new RegExp(this.filterBy.title, 'i');
       return labels.filter(label => regex.test(label.title));
