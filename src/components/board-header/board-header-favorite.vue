@@ -17,6 +17,16 @@ export default {
             isHovered: false
         }
     },
+    watch: {
+        '$route.params.boardId': {
+            handler(newId, oldId) {
+                const user = this.$store.getters.user;
+                this.isFavorite = user.favorites.some(favoriteId => favoriteId === this.$route.params.boardId)
+            },
+            deep: true,
+            immediate: true
+        }
+    },
     methods: {
         toggleFavorite() {
             this.isFavorite = !this.isFavorite;

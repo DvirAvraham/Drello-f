@@ -9,7 +9,7 @@
       <board-header-title
         :style="{ color: 'black' }"
         @editTitle="editTitle"
-        :title="boardTitle"
+        :board="board"
         :createdBy="boardCreatorId"
       />
 

@@ -16,17 +16,29 @@
 export default {
 	name: 'board-header-title',
 	props: {
-		title: String,
+		board: Object,
 		createdBy: String
 	},
 	data() {
 		return {
-			titleToEdit: this.title
+			titleToEdit: ''
+		}
+	},
+	created() {
+		this.titleToEdit = this.boardTitle
+	},
+	watch: {
+		'$route.params.boardId': {
+			async handler(newId, oldId) {
+				this.titleToEdit = this.$store.getters.currBoard.title;
+			},
+			deep: true,
+			immediate: true
 		}
 	},
 	methods: {
 		editTitle() {
-			if (!this.titleToEdit) return this.titleToEdit = this.title;
+			if (!this.titleToEdit) return this.titleToEdit = this.boardTitle;
 			if (!this.isEditAble) return;
 			this.$emit('editTitle', this.titleToEdit);
 		}
@@ -46,6 +58,9 @@ export default {
 			if (size < MIN_SIZE) return MIN_SIZE;
 			else if (size > MAX_SIZE) return MAX_SIZE;
 			return size;
+		},
+		boardTitle() {
+			return this.board?.title;
 		}
 	}
 }

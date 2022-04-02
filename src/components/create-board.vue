@@ -70,8 +70,9 @@ export default {
     methods: {
         async addBoard() {
             const board = this.boardToAdd;
-            this.closeModal();
             const savedBoard = await this.$store.dispatch({ type: 'saveBoard', board });
+            this.$store.commit({ type: 'setCurrentBoard', board: savedBoard });
+            this.closeModal();
             this.$router.push(`/board/${savedBoard._id}`);
 
         },
