@@ -95,7 +95,7 @@ export default {
 
       console.log(action)
       if (action) activityTxt = `Edited ${action.type} in ${task.title}`
-      else activityTxt = task._id ? `Edited task ${task.title}` : `Added task ${task.title}`
+      else activityTxt = task._id ? `Edited task ${task.title}` : `${state.currentBoard.title}`
 
       if (state.currentGroup) groupId = state.currentGroup._id;
 
@@ -194,7 +194,7 @@ export default {
           const user = userService.getLoggedinUser();
           const newMember = val[val.length - 1];
           // txt, byMemberId, taskId, groupId, boardId
-          const activity = boardService.addActivity(`invited you to board`, user._id, null, null, state.currentBoard._id)
+          const activity = boardService.addActivity(state.currentBoard.title, user._id, null, null, state.currentBoard._id)
           activity.toMemberId = newMember._id;
           socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
         }

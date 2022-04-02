@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import { comment } from 'postcss'
 import commentActions from './comment-actions.vue'
 export default {
     name: 'activities-list',

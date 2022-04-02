@@ -132,6 +132,18 @@
     line-height: 16px;
     margin-bottom: 4px;
   }
+
+  .notification-btn{
+        height: 32px;
+        height: 32px;
+        width: 32px;
+        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        cursor: pointer;
+  }
 }
 
 .header-cmp {
@@ -221,9 +233,7 @@
 .icon.icon-info {
   margin-inline-end: 8.5px;
 }
-.icon.icon-bell {
-  margin-inline-end: 5px;
-}
+
 
 @media (max-width: 1000px) {
   .main-header {

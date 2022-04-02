@@ -117,7 +117,19 @@
         />
         <board-search v-click-outside="toggleBoardSearch" v-if="isBoardSearch" :filterBy="filterBy"></board-search>
       </div>
-      <span class="icon icon-bell"></span>
+      <div
+        class="notification-btn"
+        @click="toggleNotificationsModal"
+        :class="{ 'red-bg': isReaden }"
+      >
+        <span class="icon icon-bell"></span>
+      </div>
+      <user-notification
+        @closeModal="toggleNotificationsModal"
+        v-click-outside="toggleNotificationsModal"
+        v-if="isNotificationModal"
+        class="popup"
+      ></user-notification>
       <!-- <i class="fa-regular fa-bell notification-header"></i> -->
       <div class="user">
         <avatar
@@ -149,6 +161,7 @@ import boardSearch from './board-search.vue'
 import recentBoardsPopup from './recent-boards-popup.vue'
 import favoriteBoardsPopup from './favorite-boards-popup.vue';
 import morePopup from './more-popup.vue';
+import userNotification from './user-notification.vue';
 export default {
   created() {
   },
@@ -163,6 +176,7 @@ export default {
       isRecentBoards: false,
       isFavoriteBoards: false,
       isMoreModal: false,
+      isNotificationModal: false,
       filterBy: {
         title: ''
       }
@@ -198,6 +212,13 @@ export default {
     },
     toggleMoreModal() {
       this.isMoreModal = !this.isMoreModal
+    },
+    toggleNotificationsModal() {
+      this.isNotificationModal = !this.isNotificationModal
+    },
+    toggleModal(val) {
+      console.log(val)
+      this[val] = !this[val]
     }
   },
   computed: {
@@ -209,6 +230,9 @@ export default {
     },
     boards() {
       return this.$store.getters.boards
+    },
+    isReaden() {
+      return this.$store.getters.user?.activities.some(activity => !activity.isReaden)
     }
 
 
@@ -220,7 +244,8 @@ export default {
     boardSearch,
     recentBoardsPopup,
     favoriteBoardsPopup,
-    morePopup
+    morePopup,
+    userNotification
   },
 };
 </script>

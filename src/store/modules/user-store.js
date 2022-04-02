@@ -50,6 +50,10 @@ export default {
       const idx = state.loggedinUser.activities.findIndex(activity => activity._id === activityId);
       state.loggedinUser.activities[idx].isReaden = !state.loggedinUser.activities[idx].isReaden;
       userService.saveLocalUser(state.loggedinUser)
+    },
+    toggleAllActivities(state) {
+      state.loggedinUser.activities.forEach(activity => activity.isReaden = true)
+      userService.saveLocalUser(state.loggedinUser)
     }
   },
   actions: {
@@ -105,6 +109,13 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    async toggleAllActivities({state, commit, dispatch}) {
+      try {
+      commit({type: 'toggleAllActivities'})
+      await dispatch({ type: 'updateUser', user: state.loggedinUser })
+    } catch (err) {
+      throw err
     }
   },
-};
+  }}
