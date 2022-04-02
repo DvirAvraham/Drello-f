@@ -7,7 +7,7 @@ export default {
   state: {
     loggedinUser: userService.getLoggedinUser(),
     allUsers: [],
-    userActivities: userService.getLoggedinUser().activities
+    userActivities: userService.getLoggedinUser()
   },
   getters: {
     user(state) {
@@ -27,7 +27,7 @@ export default {
       return miniUser;
     },
     userActivities(state) {
-      return state.userActivities
+      return state.userActivities.activities
     }
   },
   mutations: {

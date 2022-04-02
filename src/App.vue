@@ -65,14 +65,14 @@ export default {
 					message = byMember + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
 				}
 				if (userService.getLoggedinUser()._id === activity.toMemberId) {
-					this.$store.commit({ type: 'updateActivities', activity })
 					this.notify(true, title, message)
+					this.$store.commit({ type: 'updateActivities', activity })
 				}
 			} else {
 				title = activity.txt
 				message = byMember + ' just ' + title + ' to ' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
-				this.$store.commit({ type: 'updateActivities', activity })
 				this.notify(null, title, message)
+				this.$store.commit({ type: 'updateActivities', activity })
 			}
 		},
 	},
