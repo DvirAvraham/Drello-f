@@ -2,8 +2,8 @@
   display: grid;
   padding: 0;
   list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  grid-auto-rows: 120px;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 185px));
+  grid-auto-rows: 96px;
   column-gap: 16px;
   row-gap: 32px;
   grid-auto-flow: dense;
@@ -16,6 +16,37 @@
     border-radius: 3px;
     position: relative;
     padding: 10px;
+    display: flex;
+    &:hover{
+      .small-overlay{
+        // display: block;
+         opacity: 0.15;
+        }
+        .star{
+          transform: translateX(0);
+          opacity: 1;
+          transition:  0.3s;
+          
+        }
+      }
+    .small-overlay{
+      position: absolute;
+      inset: 0;
+      background-color: black;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity .3s;
+    }
+    h2{
+      z-index: 5;
+      position: relative;
+      font-size: 16px;
+      color: #FFFFFF;
+      font-weight: bold;
+      line-height: 20px;
+      margin: 2px 0 0 0;
+      
+    }
   }
   & .star {
     font-size: 12px;
@@ -23,5 +54,9 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
+    z-index: 5;
+    transition:  0.3s;
+    transform: translateX(15px);
+    opacity: 0;
   }
 }

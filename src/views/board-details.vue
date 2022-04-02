@@ -121,8 +121,18 @@ export default {
 		editBoardTitle(newTitle) {
 			this.$store.dispatch({ type: 'setBoardPrefs', key: 'title', val: newTitle });
 		},
-		toggleFavorite(isFavorite) {
-			this.$store.dispatch({ type: 'setBoardPrefs', key: 'isFavorite', val: isFavorite });
+		async toggleFavorite(isFavorite) {
+			const user = JSON.parse(JSON.stringify(this.user))
+			if (!user.favorites) user.favorites = []
+			const index = user.favorites.findIndex(favId => {
+				return favId === this.currBoard._id
+			})
+			if (isFavorite) {
+				user.favorites.push(this.currBoard._id)
+			} else {
+				user.favorites.splice(index, 1)
+			}
+			await this.$store.dispatch({ type: 'updateUser', user });
 		},
 		cleanStore(itemsToClean) {
 			itemsToClean.forEach(item => {
@@ -153,6 +163,9 @@ export default {
 		},
 	},
 	computed: {
+		user() {
+			return this.$store.getters.user;
+		},
 		miniUser() {
 			return this.$store.getters.miniUser;
 		},

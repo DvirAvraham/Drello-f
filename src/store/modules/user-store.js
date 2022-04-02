@@ -38,6 +38,9 @@ export default {
     addRecentBoard(state, { boardId }) {
       const user = userService.addRecentBoard(boardId);
       state.loggedinUser = user;
+    },
+    setUser(state,{user}){
+      state.loggedinUser = user
     }
   },
   actions: {
@@ -76,6 +79,17 @@ export default {
         console.log(err);
         throw err;
       }
+    },
+    async updateUser({commit},{user}){
+       try{
+          await userService.update(user)
+          commit({type: 'setUser',user})
+       }catch (err){
+         console.log(err)
+         throw err
+       }
     }
+
+
   },
 };

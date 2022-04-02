@@ -1,11 +1,16 @@
 <template>
     <li :style="boardStyle" v-if="board">
-        {{ board.title }}
-        <section class="star" @click.stop="toggleFavorite(board._id)">
-            <i v-if="!board.isFavorite" class="fa-regular fa-star"></i>
-            <i v-else class="fa-solid fa-star"></i>
-            <div class></div>
-        </section>
+        <div class="preview-content">
+            <h2>{{ board.title }}</h2>
+            <section class="star" @click.stop="toggleFavorite(board._id)">
+                <i
+                    v-if="!user.favorites?.includes(board._id)"
+                    class="fa-regular fa-star white-font"
+                ></i>
+                <i v-else class="fa-solid fa-star"></i>
+            </section>
+        </div>
+        <div class="small-overlay"></div>
     </li>
 </template>
 
@@ -28,6 +33,10 @@ export default {
                 'background-image': this.board.style.bgImg ? `url(${this.board.style.bgImg})` : ''
             }
             return style
+        },
+        user() {
+            return this.$store.getters.user;
+
         }
     }
 }

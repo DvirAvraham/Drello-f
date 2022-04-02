@@ -11,7 +11,8 @@ export const userService = {
   getUsers,
   getUserById,
   getGuestUser,
-  addRecentBoard
+  addRecentBoard,
+  update
 };
 
 function getUsers() {
@@ -49,6 +50,20 @@ function addRecentBoard(boardId) {
   user.recentBoards.unshift(boardId);
   user.recentBoards = user.recentBoards.slice(0, 5);
   return _saveLocalUser(user);
+}
+
+async function update(user) {
+  console.log(user)
+	try {
+		user = await httpService.put(`user/${user._id}`, user);
+		if (getLoggedinUser()._id === user._id)
+			_saveLocalUser(user);
+		return user;
+	} catch (err) {
+		console.log('Failed to update user', err);
+	}
+
+	// return user;
 }
 
 function getGuestUser() {

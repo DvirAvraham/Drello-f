@@ -17,7 +17,29 @@
   max-height: 44px;
   padding: 6px 4px;
   align-items: center;
-
+  .header-btn{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    gap:5px;
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin-left: 5px;
+    position: relative;
+    svg{
+          align-self: flex-end;
+    }
+    &:hover{
+      background-color: hsla(0, 0%, 100%, .3);
+    }
+  }
+  .hidden-btn-header{
+    @media (max-width:510px){
+      display: none;
+    }
+  }
   .create-board-container {
     .create-btn {
       margin: 0;

@@ -15,6 +15,7 @@ import { ElNotification } from 'element-plus'
 export default {
 	name: 'app',
 	async created() {
+		await this.$store.dispatch({ type: 'loadBoards' })
 		socketService.off('notify activity')
 		socketService.on('notify activity', this.notifyActivity)
 		try {
@@ -77,7 +78,7 @@ export default {
 		},
 		isHomePage() {
 			return this.$store.getters.isHomePage
-		}
+		},
 	},
 	components: {
 		appHeader,

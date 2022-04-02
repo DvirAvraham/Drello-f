@@ -4,7 +4,7 @@
             v-for="board in boards"
             @toggleFavorite="toggleFavorite"
             :board="board"
-            :key="board._id"
+            :key="board"
             @click="moveToBoard(board._id)"
         />
     </ul>

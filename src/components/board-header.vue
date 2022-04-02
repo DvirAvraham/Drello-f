@@ -125,11 +125,16 @@ export default {
       return this.$store.getters.currBoard?.title;
     },
     boardFavoriteStatus() {
-      return this.$store.getters.currBoard?.isFavorite;
+      const user = JSON.parse(JSON.stringify(this.user))
+      if (!user?.favorites) user.favorites = []
+      return user?.favorites.includes(this.board._id)
     },
     boardCreatorId() {
       return this.$store.getters.currBoard?.createdBy?._id;
     },
+    user() {
+      return this.$store.getters.user;
+    }
   },
 };
 </script>

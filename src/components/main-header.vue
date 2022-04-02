@@ -31,8 +31,77 @@
           <p>Create</p>
           <span class="icon-plus"></span>
         </button>
-        <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard"></createBoard>
       </div>
+      <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard"></createBoard>
+      <div class="header-btn hidden-btn-header" @click="toggleRecentBoards">
+        <span>Recent</span>
+        <svg
+          width="16"
+          height="16"
+          role="presentation"
+          focusable="false"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <recent-boards-popup
+        @closePopup="toggleRecentBoards"
+        v-click-outside="toggleRecentBoards"
+        v-if="isRecentBoards"
+        :boards="boards"
+        :user="user"
+        class="popup"
+      ></recent-boards-popup>
+      <div class="header-btn hidden-btn-header" @click="toggleFavoriteBoards">
+        <span>Starred</span>
+        <svg
+          width="16"
+          height="16"
+          role="presentation"
+          focusable="false"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <div class="header-btn more-btn" @click="toggleMoreModal">
+        <span>More</span>
+        <svg
+          width="16"
+          height="16"
+          role="presentation"
+          focusable="false"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+      <more-popup
+        v-if="isMoreModal"
+        @closeMoreModal="toggleMoreModal"
+        @openRecent="toggleRecentBoards"
+        @openStarred="toggleFavoriteBoards"
+      ></more-popup>
+      <favorite-boards-popup
+        @closePopup="toggleFavoriteBoards"
+        v-click-outside="toggleFavoriteBoards"
+        v-if="isFavoriteBoards"
+        :user="user"
+        class="popup"
+      ></favorite-boards-popup>
     </div>
 
     <section class="secondery-container flex align-items">
@@ -48,7 +117,6 @@
         />
         <board-search v-click-outside="toggleBoardSearch" v-if="isBoardSearch" :filterBy="filterBy"></board-search>
       </div>
-      <span class="icon icon-info"></span>
       <span class="icon icon-bell"></span>
       <!-- <i class="fa-regular fa-bell notification-header"></i> -->
       <div class="user">
@@ -78,10 +146,10 @@ import createBoard from './create-board.vue';
 import Avatar from 'vue3-avatar';
 import userModal from './board-header/user-modal.vue';
 import boardSearch from './board-search.vue'
+import recentBoardsPopup from './recent-boards-popup.vue'
+import favoriteBoardsPopup from './favorite-boards-popup.vue';
+import morePopup from './more-popup.vue';
 export default {
-  props: {
-    boards: Array
-  },
   created() {
   },
   data() {
@@ -92,10 +160,16 @@ export default {
       Search,
       isUserModal: false,
       isBoardSearch: false,
+      isRecentBoards: false,
+      isFavoriteBoards: false,
+      isMoreModal: false,
       filterBy: {
         title: ''
       }
     };
+  },
+  async created() {
+    await this.$store.dispatch({ type: 'loadBoards' })
   },
   methods: {
     home() {
@@ -115,6 +189,15 @@ export default {
     },
     toggleBoardSearch() {
       this.isBoardSearch = !this.isBoardSearch
+    },
+    toggleRecentBoards() {
+      this.isRecentBoards = !this.isRecentBoards
+    },
+    toggleFavoriteBoards() {
+      this.isFavoriteBoards = !this.isFavoriteBoards
+    },
+    toggleMoreModal() {
+      this.isMoreModal = !this.isMoreModal
     }
   },
   computed: {
@@ -124,13 +207,20 @@ export default {
     isBoard() {
       return this.$store.getters.currBoard
     },
+    boards() {
+      return this.$store.getters.boards
+    }
+
 
   },
   components: {
     createBoard,
     Avatar,
     userModal,
-    boardSearch
+    boardSearch,
+    recentBoardsPopup,
+    favoriteBoardsPopup,
+    morePopup
   },
 };
 </script>
