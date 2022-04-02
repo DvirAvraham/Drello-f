@@ -18,6 +18,7 @@
 				@columnChange="columnChange"
 				@addGroup="addGroup"
 				@editGroup="editGroup"
+				@removeGroup="removeGroup"
 				@cleanStore="cleanStore"
 				:groups="groupsToDisplay"
 				:board="currBoard"
@@ -114,6 +115,9 @@ export default {
 		},
 		editGroup({ groupIdx, newGroup }) {
 			this.$store.dispatch({ type: 'setGroup', groupIdx, newGroup })
+		},
+		removeGroup(groupId) {
+			this.$store.dispatch({ type: 'removeGroup', groupId })
 		},
 		columnChange(boardGroups) {
 			this.$store.dispatch({ type: 'setGroups', groups: boardGroups });
