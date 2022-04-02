@@ -76,7 +76,7 @@
             <span class="icon"></span>
             <h3>Activity</h3>
           </div>
-          <button class="show-details-btn">Show Details</button>
+          <button class="show-details-btn" @click="toggleActivityDetails">Show Details</button>
         </div>
         <div
           v-click-outside="closeComment"
@@ -105,6 +105,7 @@
         <activities-list
           :task="task"
           :user="miniUser"
+          :showDetails="isShowActivityDetails"
           @updateItem="updateItem"
           @findMembers="tagMembers"
           :memberToAdd="memberToAdd"
@@ -197,6 +198,7 @@ export default {
       actionType: null,
       isDescEditMode: false,
       isComment: false,
+      isShowActivityDetails: false,
       comment: '',
       isFindMembers: false,
       lastAtIndex: 0,
@@ -429,6 +431,9 @@ export default {
     closeModal() {
       this.$emit('closeModal')
     },
+    toggleActivityDetails() {
+      this.isShowActivityDetails = !this.isShowActivityDetails;
+    }
   },
   computed: {
     board() {
