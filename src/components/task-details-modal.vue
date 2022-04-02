@@ -276,7 +276,8 @@ export default {
           const username = txt.substring(1);
           const user = this.board.members.find(member => member.username === username);
           if (user) {
-            activity.to = user;
+            console.log('ytth');
+            activity.toMemberId = user._id;
             socketService.emit('notify user tag', activity)
           }
         }
