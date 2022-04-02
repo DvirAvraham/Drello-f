@@ -93,9 +93,10 @@ export default {
       let activityTxt;
       var currTask = state.currentTask
 
-      console.log(action)
+      if (groupId) action = { type: 'addTask' }
       if (action) activityTxt = `Edited ${action.type} in ${task.title}`
       else activityTxt = task._id ? `Edited task ${task.title}` : `${state.currentBoard.title}`
+      if (action?.type === 'addTask') activityTxt = 'added task '
 
       if (state.currentGroup) groupId = state.currentGroup._id;
 
@@ -123,7 +124,10 @@ export default {
       const activity = boardService.addActivity(activityTxt, userId, currTask?._id, currGroup?._id, state.currentBoard._id)
       if (action?.type === 'members') activity.toMemberId = action.item._id;
       state.currentBoard.activities.unshift(activity);
-      if (!action || action.type === 'members') socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
+
+      if (action?.type && (action.type === 'addTask' || action.type === 'members')) {
+        socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
+      }
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
@@ -196,6 +200,7 @@ export default {
           // txt, byMemberId, taskId, groupId, boardId
           const activity = boardService.addActivity(state.currentBoard.title, user._id, null, null, state.currentBoard._id)
           activity.toMemberId = newMember._id;
+          console.log(2);
           socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
         }
         // commit({ type: 'setCurrentBoard', board: savedBoard });

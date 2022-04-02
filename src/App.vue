@@ -76,7 +76,7 @@ export default {
 					this.notify(true, title, message)
 					this.$store.commit({ type: 'updateActivities', activity })
 				}
-			} else if (board.members.find(member => member._id === this.miniUser._id)) {
+			} else if (activity.byMemberId !== this.miniUser._id && board.members.find(member => member._id === this.miniUser._id)) {
 				title = activity.txt
 				message = byMember.fullname + ' just ' + title + ' to ' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
 				this.notify(null, title, message)
