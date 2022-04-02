@@ -2,6 +2,24 @@
     width: 432px;
     top: 48px;
     right: 35px;
+    overflow-y: auto;
+    max-height: calc(100vh - 51px);
+
+    &::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+      }
+    
+      &::-webkit-scrollbar-track-piece {
+        border-radius: $border-rsize;
+        background: $scroll-y-bg-clr;
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        border-radius: $border-rsize;
+        background: $scroll-y-clr;
+      }
+
     .empty-notifications{
         display: flex;
         align-items: center;
