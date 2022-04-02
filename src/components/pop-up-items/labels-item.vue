@@ -21,7 +21,7 @@
           class="label-txt"
         >
           {{ label.title }}
-          <span class="icon-complete" v-if="userLabelIds.includes(label._id)"></span>
+          <span class="icon-complete" v-if="userLabelIds?.includes(label._id)"></span>
         </span>
         <span
           @click.stop="updateCurrData(label), (isCreating = true)(isEditing = true)"
