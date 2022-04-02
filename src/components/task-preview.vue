@@ -46,13 +46,15 @@
             v-if="this.task.cover?.type !== 'inline'"
             :class="{ 'p-b-10': task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length }"
           >
-            <div v-if="task.dueDate">
+            <div v-if="task.dueDate" class="duedate" @click.stop="toggleStatus">
               <span
                 class="preview-icon date"
                 :style="{ 'font-size': 12 + 'px' }"
                 :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
               >
                 <span class="clock-icon" v-if="task.status?.length"></span>
+                <span class="icon-checklist" v-if="task?.status === 'completed'"></span>
+                <span class="icon-emptyBox" v-if="task?.status === 'overdue'"></span>
                 {{ date }}
               </span>
             </div>
@@ -132,13 +134,30 @@ export default {
   },
   created() {
     this.taskCopy = JSON.parse(JSON.stringify(this.task))
-
   },
   components: {
     Draggable,
     quickEdit
   },
   methods: {
+    toggleStatus() {
+      var taskDup = JSON.parse(JSON.stringify(this.task))
+      if (taskDup.status === '' || !taskDup.status) {
+        taskDup.status = 'completed'
+      }
+      else if (taskDup.status === 'completed') {
+        if (Date.now() > taskDup.dueDate) {
+          taskDup.status = 'overdue'
+        }
+        else {
+          taskDup.status = ''
+        }
+      }
+      else if (taskDup.status === 'overdue') {
+        taskDup.status = 'completed'
+      }
+      this.updateTask(taskDup)
+    },
     toggleLabel() {
       this.$store.commit({ type: 'toggleLabel' })
     },
@@ -157,8 +176,9 @@ export default {
       this.$emit('onQuickEdit', false)
       this.isQuickEdit = false
     },
-    updateTask(_, editedTask = this.taskCopy) {
+    updateTask(editedTask = this.taskCopy) {
       this.$emit('updateTask', JSON.parse(JSON.stringify(editedTask)))
+      this.taskCopy = JSON.parse(JSON.stringify(this.task))
     },
     openTask() {
       this.closeQuickEdit()

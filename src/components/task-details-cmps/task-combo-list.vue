@@ -54,10 +54,9 @@ export default {
   },
   methods: {
     updateStatus() {
-      var status
+      var status = ''
       if (this.dateStatus) status = 'completed';
       else if (this.dueDate < Date.now()) status = 'overdue'
-      else status = ''
       const item = {
         type: 'status',
         item: status
@@ -69,6 +68,7 @@ export default {
     },
     setDate() {
       this.$emit('setDate');
+      this.updateStatus()
     },
     setMembers() {
       this.$emit('setMembers');

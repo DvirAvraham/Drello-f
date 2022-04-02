@@ -331,7 +331,6 @@ export default {
         if (!this.taskToEdit.activities) this.taskToEdit.activities = [];
         this.taskToEdit.activities.unshift(item.item);
       } else if (item.type === 'dueDate') {
-        if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
         this.taskToEdit.dueDate = item.item;
         this.onTaskEdit();
         this.closePopup();
@@ -384,7 +383,6 @@ export default {
       this.onTaskEdit();
     },
     onTaskEdit(action = null) {
-      // console.log('this.taskToEdit', this.taskToEdit);
       this.$store.dispatch({
         type: 'setTask',
         task: JSON.parse(JSON.stringify(this.taskToEdit)),

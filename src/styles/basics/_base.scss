@@ -114,3 +114,13 @@ legend {
 ul {
   list-style-type: none;
 }
+
+.notification-link{
+  text-decoration: none;
+  color: $clr4;
+  font-weight: bold;
+  &:hover{
+    text-decoration: underline;
+   color: darken($clr4, 10%);
+  }
+}

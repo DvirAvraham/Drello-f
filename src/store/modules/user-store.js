@@ -6,7 +6,8 @@ import { socketService } from '../../services/socket-service'
 export default {
   state: {
     loggedinUser: userService.getLoggedinUser(),
-    allUsers: []
+    allUsers: [],
+    userActivities: userService.getLoggedinUser()
   },
   getters: {
     user(state) {
@@ -25,6 +26,9 @@ export default {
       };
       return miniUser;
     },
+    userActivities(state) {
+      return state.userActivities.activities
+    }
   },
   mutations: {
     setLoggedinUser(state, { user }) {
@@ -41,6 +45,10 @@ export default {
     },
     setUser(state,{user}){
       state.loggedinUser = user
+    },
+    updateActivities(state, { activity }) {
+      console.log(activity)
+      state.userActivities.unshift(activity)
     }
   },
   actions: {

@@ -92,7 +92,6 @@ export default {
     },
     getMember(id) {
       const user = this.users.find(user => user._id === id);
-      console.log(user)
       return user
     }
 

@@ -143,10 +143,11 @@ export default {
         commit({ type: 'setBoards', boards });
         socketService.off('board update')
         socketService.on('board update', board => {
+          const user = userService.getLoggedinUser();
           if (board._id === state.currentBoard?._id) {
-            // commit({ type: 'saveBoard', board });
-            console.log(board);
             commit({ type: 'setCurrentBoard', board });
+          } else if (board.members.find(member => member._id === user._id)) {
+            commit({ type: 'saveBoard', board });
           }
         })
       } catch (err) {
@@ -163,6 +164,7 @@ export default {
         const boardCopy = JSON.parse(JSON.stringify(board))
         commit({ type: 'saveBoard', board: boardCopy });
         const savedBoard = await boardService.saveBoard(board);
+        socketService.emit('set board', board);
         return savedBoard;
       } catch (err) {
         console.log(err);
@@ -186,12 +188,12 @@ export default {
     },
     async setBoardPrefs({ state, commit, dispatch }, { key, val }) {
       try {
-
         if (key === 'members') {
           const user = userService.getLoggedinUser();
           const newMember = val[val.length - 1];
-          const activity = boardService.addActivity(`${user.fullname} invited you to board ${state.currentBoard.title}`, user, { type: 'board', _id: state.currentBoard._id }, state.currentBoard._id)
-          activity.toMember = newMember;
+          // txt, byMemberId, taskId, groupId, boardId
+          const activity = boardService.addActivity(`invited you to board`, user._id, null, null, state.currentBoard._id)
+          activity.toMemberId = newMember._id;
           socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
         }
         commit({ type: 'updateBoard', key, val });

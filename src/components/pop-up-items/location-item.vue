@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="text" placeholder="Yes.." ref="autocomplete" />
+        <input class="location-input" type="text" placeholder="Search.." ref="autocomplete" />
     </div>
 </template>
 
