@@ -19,7 +19,8 @@ export default {
 		// await this.$store.dispatch({ type: 'loadBoards' })
 		socketService.off('notify activity')
 		socketService.on('notify activity', this.notifyActivity)
-		socketService.on('mention user', () => console.log('activityyy'))
+		socketService.off('mention user')
+		socketService.on('mention user', this.notifyActivity)
 		try {
 			await this.$store.dispatch({ type: 'loadUsers' })
 			if (this.miniUser) socketService.emit('set-user-socket', this.miniUser._id)

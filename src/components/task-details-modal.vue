@@ -268,16 +268,17 @@ export default {
       const activity = {
         by: this.miniUser,
         createdAt: Date.now(),
-        txt: `${this.miniUser.username} tagged you`
+        txt: `${this.miniUser.username} mentioned you`
       }
 
       item.item.txt.split(' ').forEach(txt => {
         if (txt[0] === '@') {
           const username = txt.substring(1);
-          const user = this.board.members.find(member => member.username === username);
+          const user = this.board.members.find(member => member.fullname === username);
           if (user) {
-            console.log('ytth');
+            console.log('ytth', user);
             activity.toMemberId = user._id;
+            activity.isMention = true;
             socketService.emit('notify user tag', activity)
           }
         }
