@@ -64,8 +64,13 @@ export default {
 					title = "You've been added to a new board !"
 					message = byMember.fullname + ` just added you to a new board ` + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
 				} else {
-					title = "You've been tagged"
-					message = byMember.fullname + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+					if (activity.isMention) {
+						title = "You've been mentioned"
+						message = byMember.fullname + ' just menitoned you task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+					} else {
+						title = "You've been tagged"
+						message = byMember.fullname + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+					}
 				}
 				if (userService.getLoggedinUser()._id === activity.toMemberId) {
 					this.notify(true, title, message)
