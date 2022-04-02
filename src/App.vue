@@ -54,24 +54,24 @@ export default {
 			// const itemName = activity.item?.taskTitle || activity.item?.taskGroup
 			let title
 			let message
-			const byMember = this.getMemberById(activity.byMemberId).fullname
+			const byMember = this.getMemberById(activity.byMemberId)
 			let board = this.getBoardById(activity.boardId)
 			if (!board) board = await boardService.getBoardById(activity.boardId)
 			if (activity.toMemberId) {
 				if (!activity.groupId) {
 					title = "You've been added to a new board !"
-					message = byMember + ` just added you to a new board ` + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+					message = byMember.fullname + ` just added you to a new board ` + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
 				} else {
 					title = "You've been tagged"
-					message = byMember + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+					message = byMember.fullname + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
 				}
 				if (userService.getLoggedinUser()._id === activity.toMemberId) {
 					this.notify(true, title, message)
 					this.$store.commit({ type: 'updateActivities', activity })
 				}
-			} else {
+			} else if (board.members.find(member => member._id === this.miniUser._id)) {
 				title = activity.txt
-				message = byMember + ' just ' + title + ' to ' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				message = byMember.fullname + ' just ' + title + ' to ' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
 				this.notify(null, title, message)
 				this.$store.commit({ type: 'updateActivities', activity })
 			}

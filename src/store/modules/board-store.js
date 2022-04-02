@@ -123,7 +123,7 @@ export default {
       const activity = boardService.addActivity(activityTxt, userId, currTask?._id, currGroup?._id, state.currentBoard._id)
       if (action?.type === 'members') activity.toMemberId = action.item._id;
       state.currentBoard.activities.unshift(activity);
-      socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
+      if (!action || action.type === 'members') socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
@@ -132,8 +132,8 @@ export default {
       const { _id, title } = state.currentBoard.groups[task.groupIdx].tasks[taskIdx];
       state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1);
 
-      const activity = boardService.addActivity('Removed task', userService.getLoggedinUser(), { type: 'task', _id, title })
-      state.currentBoard.activities.unshift(activity);
+      // const activity = boardService.addActivity('Removed task', userService.getLoggedinUser(), { type: 'task', _id, title })
+      // state.currentBoard.activities.unshift(activity);
     },
   },
   actions: {
