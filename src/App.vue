@@ -16,7 +16,7 @@ import { ElNotification } from 'element-plus'
 export default {
 	name: 'app',
 	async created() {
-		await this.$store.dispatch({ type: 'loadBoards' })
+		// await this.$store.dispatch({ type: 'loadBoards' })
 		socketService.off('notify activity')
 		socketService.on('notify activity', this.notifyActivity)
 		try {

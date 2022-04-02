@@ -188,6 +188,8 @@ export default {
     },
     async setBoardPrefs({ state, commit, dispatch }, { key, val }) {
       try {
+        commit({ type: 'updateBoard', key, val });
+        await dispatch({ type: 'saveBoard', board: state.currentBoard });
         if (key === 'members') {
           const user = userService.getLoggedinUser();
           const newMember = val[val.length - 1];
@@ -196,8 +198,6 @@ export default {
           activity.toMemberId = newMember._id;
           socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
         }
-        commit({ type: 'updateBoard', key, val });
-        await dispatch({ type: 'saveBoard', board: state.currentBoard });
         // commit({ type: 'setCurrentBoard', board: savedBoard });
       } catch (err) {
         console.log(err);

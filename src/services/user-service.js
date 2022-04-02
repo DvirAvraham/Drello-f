@@ -12,7 +12,8 @@ export const userService = {
   getUserById,
   getGuestUser,
   addRecentBoard,
-  update
+  update,
+  saveLocalUser
 };
 
 function getUsers() {
@@ -28,12 +29,12 @@ async function getUserById(userId) {
 async function login(cred) {
   const user = await httpService.post(ENDPOINT + '/login', cred)
   // socketService.emit('set-user-socket', user._id);
-  if (user) return _saveLocalUser(user)
+  if (user) return saveLocalUser(user)
 }
 
 async function signup(cred) {
   const user = await httpService.post(ENDPOINT + '/signup', cred)
-  return _saveLocalUser(user)
+  return saveLocalUser(user)
 }
 
 function logout() {
@@ -49,21 +50,21 @@ function addRecentBoard(boardId) {
   }
   user.recentBoards.unshift(boardId);
   user.recentBoards = user.recentBoards.slice(0, 5);
-  return _saveLocalUser(user);
+  return saveLocalUser(user);
 }
 
 async function update(user) {
   console.log(user)
-	try {
-		user = await httpService.put(`user/${user._id}`, user);
-		if (getLoggedinUser()._id === user._id)
-			_saveLocalUser(user);
-		return user;
-	} catch (err) {
-		console.log('Failed to update user', err);
-	}
+  try {
+    user = await httpService.put(`user/${user._id}`, user);
+    if (getLoggedinUser()._id === user._id)
+      saveLocalUser(user);
+    return user;
+  } catch (err) {
+    console.log('Failed to update user', err);
+  }
 
-	// return user;
+  // return user;
 }
 
 function getGuestUser() {
@@ -74,9 +75,9 @@ function getGuestUser() {
   };
 }
 
-function _saveLocalUser(user) {
-  const { activities, ...userToSave } = user;
-  sessionStorage.setItem(LOGGEDIN_USER_KEY, JSON.stringify(userToSave))
+function saveLocalUser(user) {
+  // const { activities, ...userToSave } = user;
+  sessionStorage.setItem(LOGGEDIN_USER_KEY, JSON.stringify(user))
   return user
 }
 

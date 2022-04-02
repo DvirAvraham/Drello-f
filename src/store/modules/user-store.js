@@ -7,7 +7,6 @@ export default {
   state: {
     loggedinUser: userService.getLoggedinUser(),
     allUsers: [],
-    userActivities: userService.getLoggedinUser()
   },
   getters: {
     user(state) {
@@ -26,9 +25,6 @@ export default {
       };
       return miniUser;
     },
-    userActivities(state) {
-      return state.userActivities.activities
-    }
   },
   mutations: {
     setLoggedinUser(state, { user }) {
@@ -43,12 +39,17 @@ export default {
       const user = userService.addRecentBoard(boardId);
       state.loggedinUser = user;
     },
-    setUser(state,{user}){
+    setUser(state, { user }) {
       state.loggedinUser = user
     },
     updateActivities(state, { activity }) {
-      console.log(activity)
-      state.userActivities.unshift(activity)
+      state.loggedinUser.activities.unshift(activity)
+      userService.saveLocalUser(state.loggedinUser)
+    },
+    toggleActivity(state, { activityId }) {
+      const idx = state.loggedinUser.activities.findIndex(activity => activity._id === activityId);
+      state.loggedinUser.activities[idx].isReaden = !state.loggedinUser.activities[idx].isReaden;
+      userService.saveLocalUser(state.loggedinUser)
     }
   },
   actions: {
@@ -88,16 +89,22 @@ export default {
         throw err;
       }
     },
-    async updateUser({commit},{user}){
-       try{
-          await userService.update(user)
-          commit({type: 'setUser',user})
-       }catch (err){
-         console.log(err)
-         throw err
-       }
+    async updateUser({ commit }, { user }) {
+      try {
+        await userService.update(user)
+        commit({ type: 'setUser', user })
+      } catch (err) {
+        console.log(err)
+        throw err
+      }
+    },
+    async toggleActivity({ commit, dispatch, state }, { activityId }) {
+      try {
+        commit({ type: 'toggleActivity', activityId })
+        await dispatch({ type: 'updateUser', user: state.loggedinUser })
+      } catch (err) {
+        throw err
+      }
     }
-
-
   },
 };
