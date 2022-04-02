@@ -21,7 +21,7 @@ export default {
         '$route.params.boardId': {
             handler(newId, oldId) {
                 const user = this.$store.getters.user;
-                this.isFavorite = user.favorites.some(favoriteId => favoriteId === this.$route.params.boardId)
+                this.isFavorite = user?.favorites.some(favoriteId => favoriteId === this.$route.params.boardId)
             },
             deep: true,
             immediate: true
