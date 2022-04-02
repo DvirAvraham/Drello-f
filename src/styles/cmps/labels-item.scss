@@ -76,6 +76,13 @@
 
 .label {
 
+  & .icon-complete{
+    color: #fff;
+    position: absolute;
+    left: 200px;
+    font-weight: 400;
+  }
+
   &:hover {
     position: relative;
 
@@ -87,12 +94,9 @@
     }
 
     .label-txt {
-      // padding-left: 7px;
       position: absolute;
       width: 100.5%;
 
-      // left: -1.5%;
-      span {}
     }
   }
 

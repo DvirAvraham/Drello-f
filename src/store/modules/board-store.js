@@ -75,7 +75,7 @@ export default {
       // state.currentBoard.activities.unshift(activity);
     },
     removeGroup(state, { groupId }) {
-      const idx = state.currentBoard.groups.indexOf(group => group._id === groupId);
+      const idx = state.currentBoard.groups.findIndex(group => group._id === groupId);
       const { _id, title } = state.currentBoard.groups[idx];
       state.currentBoard.groups.splice(idx, 1);
 
@@ -225,7 +225,7 @@ export default {
       try {
         commit({ type: 'removeGroup', groupId });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
-      } catch {
+      } catch (err) {
         console.log(err);
       }
     },

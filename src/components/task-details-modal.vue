@@ -76,7 +76,7 @@
             <span class="icon"></span>
             <h3>Activity</h3>
           </div>
-          <button class="show-details-btn">Show Details</button>
+          <button class="show-details-btn" @click="toggleActivityDetails">Show Details</button>
         </div>
         <div
           v-click-outside="closeComment"
@@ -105,6 +105,7 @@
         <activities-list
           :task="task"
           :user="miniUser"
+          :showDetails="isShowActivityDetails"
           @updateItem="updateItem"
           @findMembers="tagMembers"
           :memberToAdd="memberToAdd"
@@ -197,6 +198,7 @@ export default {
       actionType: null,
       isDescEditMode: false,
       isComment: false,
+      isShowActivityDetails: false,
       comment: '',
       isFindMembers: false,
       lastAtIndex: 0,
@@ -268,15 +270,17 @@ export default {
       const activity = {
         by: this.miniUser,
         createdAt: Date.now(),
-        txt: `${this.miniUser.username} tagged you`
+        txt: `${this.miniUser.username} mentioned you`
       }
 
       item.item.txt.split(' ').forEach(txt => {
         if (txt[0] === '@') {
           const username = txt.substring(1);
-          const user = this.board.members.find(member => member.username === username);
+          const user = this.board.members.find(member => member.fullname === username);
           if (user) {
-            activity.to = user;
+            console.log('ytth', user);
+            activity.toMemberId = user._id;
+            activity.isMention = true;
             socketService.emit('notify user tag', activity)
           }
         }
@@ -429,6 +433,9 @@ export default {
     closeModal() {
       this.$emit('closeModal')
     },
+    toggleActivityDetails() {
+      this.isShowActivityDetails = !this.isShowActivityDetails;
+    }
   },
   computed: {
     board() {

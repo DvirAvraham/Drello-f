@@ -4,8 +4,10 @@
     tag="div"
     orientation="horizontal"
     drag-handle-selector=".group-title"
+    non-drag-area-selector=".group-edit-popup"
     drag-class="dragging"
     drop-class="dropping"
+    :animation-duration="0"
     @drop="onGroupDrop($event)"
   >
     <Draggable class v-for="(group, idx) in scene.groups" :key="group._id">
@@ -17,7 +19,15 @@
             spellcheck="false"
             class="group-title inline-input"
           ></textarea>
-          <span class="menu-icon"></span>
+          <span class="menu-icon" @click="toggleGroupEdit(idx, true)"></span>
+          <group-edit-popup
+            v-if="isGroupEdit[idx]"
+            class="popup"
+            @closePopup="toggleGroupEdit(idx)"
+            @removeGroup="removeGroup"
+            v-click-outside="toggleGroupEdit"
+            :group="group"
+          />
         </section>
 
         <Container
@@ -65,16 +75,16 @@
 </template>
 
 <script>
-// @click="openTaskDetails(group._id, task._id)"
 import { Container, Draggable } from 'vue3-smooth-dnd';
 import taskPreview from './task-preview.vue';
 import taskAdd from './task-add.vue';
 import addGroup from '../components/add-group.vue';
-import taskDetailsModal from '../components/task-details-modal.vue'
+import taskDetailsModal from '../components/task-details-modal.vue';
+import groupEditPopup from '../components/group-edit-popup.vue';
 
 export default {
   name: 'board-group',
-  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask', 'cleanStore', 'editGroup'],
+  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask', 'cleanStore', 'editGroup', 'removeGroup'],
   props: {
     groups: {
       type: Array,
@@ -88,6 +98,7 @@ export default {
       isTaskDetail: false,
       isLabelsOpen: false,
       isQuickEdit: false,
+      isGroupEdit: [],
     };
   },
   components: {
@@ -96,7 +107,8 @@ export default {
     taskPreview,
     taskAdd,
     addGroup,
-    taskDetailsModal
+    taskDetailsModal,
+    groupEditPopup
   },
   watch: {
     groups(newGroup, oldGroup) {
@@ -124,6 +136,15 @@ export default {
       const groupToSave = JSON.parse(JSON.stringify(group));
       groupToSave.title = newTitle;
       this.$emit('editGroup', { groupIdx: idx, newGroup: groupToSave });
+    },
+    toggleGroupEdit(idx, state = false) {
+      if (typeof idx === 'object' || state) {
+        this.isGroupEdit.forEach((groupState, groupIdx) => this.isGroupEdit[groupIdx] = false)
+      }
+      this.isGroupEdit[idx] = state;
+    },
+    removeGroup(groupId) {
+      this.$emit('removeGroup', groupId);
     },
     removeTask(taskId, groupId) {
       const task = {
