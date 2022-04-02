@@ -1,11 +1,11 @@
 <template>
     <section class="group-edit-popup">
         <header>
-            <p>List Actions</p>
+            <p>List actions</p>
             <span class="icon-cancel" @click="closePopup"></span>
         </header>
         <main>
-            <p @click="removeGroup">Delete list</p>
+            <p @click="removeGroup">Delete list...</p>
         </main>
     </section>
 </template>

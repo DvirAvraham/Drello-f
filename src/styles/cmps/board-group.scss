@@ -8,6 +8,18 @@
   margin-left: $draggable-spacing;
   padding-bottom: $draggable-spacing;
   box-shadow: 1px 7px 5px -4px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 785px) {
+    max-height: calc(100vh - 110px);
+  }
+
+  @media (max-width: 600px) {
+    max-height: calc(100vh - 165px);
+  }
+
+  @media (max-width: 400px) {
+    max-height: calc(100vh - 210px);
+  }
 }
 
 .board-container > .group-container-scrollable > .smooth-dnd-container > .smooth-dnd-draggable-wrapper:first-of-type {
@@ -22,6 +34,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   textarea {
     padding-left: 8px;

@@ -1,5 +1,5 @@
 .group-container-scrollable {
-  height: calc(100vh - 108px);
+  height: calc(100vh - 115px);
   overflow-x: auto;
   overflow-y: hidden;
 
@@ -24,10 +24,14 @@
   }
 
   @media (max-width: 785px) {
-    height: calc(100vh - 155px);
+    height: calc(100vh - 105px);
   }
 
-  @media (max-width: 510px) {
-    height: calc(100vh - 201px);
+  @media (max-width: 600px) {
+    height: calc(100vh - 145px);
+  }
+
+  @media (max-width: 400px) {
+    max-height: calc(100vh - 190px);
   }
 }
