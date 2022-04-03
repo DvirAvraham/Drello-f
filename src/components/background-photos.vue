@@ -7,6 +7,7 @@
             v-model="keyword"
             placeholder="Search photos"
             @change="setPics"
+            @keydown.enter="setPics"
         />
         <div v-if="randPics" class="photos">
             <div v-for="pic in randPics" :key="pic._id" @click="setBgImg(pic.full)">
