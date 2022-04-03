@@ -21,9 +21,9 @@
 					<p>
 						Collaborate, manage projects, and reach new productivity peaks. From
 						high rises to the home office, the way your team works is
-						unique—accomplish it all with Drello.
+						unique accomplish it all with Drello.
 					</p>
-					<button class="btn-primary" @click="moveToBoards">Get Started</button>
+					<button class="btn-primary" @click="moveToBoards">Try live demo</button>
 				</section>
 
 				<img class="hero-img" src="../images/homepage/hero.png" alt />
@@ -35,7 +35,7 @@
 				<p>
 					Start with a Drello board, lists, and cards. Customize and expand with
 					more features as your teamwork grows. Manage projects, organize tasks,
-					and build team spirit—all in one place.
+					and build team spirit all in one place.
 				</p>
 			</section>
 			<section class="info-container info-3">

@@ -1,7 +1,8 @@
 .task-preview {
   cursor: pointer;
   background-color: $clr2;
-  padding: 6px 8px 0px 8px;
+  // padding: 6px 8px 0px 8px;
+  padding: 8px;
   margin: 0 4px 8px 8px;
   border-radius: $border-rsize;
   box-shadow: 0 1px 0 #091e4240;
@@ -13,7 +14,7 @@
 
   & .title {
     word-break: break-word;
-    padding-bottom: 6px;
+    // padding-bottom: 6px;
   }
   &:hover {
     background-color: #f4f5f7;
@@ -66,7 +67,7 @@
   .icon-container {
     flex-grow: 1;
     margin-bottom: 4px;
-    margin-top: 10px;
+    margin-top: 5px;
     & > * {
       margin-inline-end: 8px;
     }
@@ -146,7 +147,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: -2px;
     & .member {
       margin-left: 2px;
     }

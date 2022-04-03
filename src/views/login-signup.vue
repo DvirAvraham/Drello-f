@@ -89,7 +89,16 @@ export default {
             // this.user.fullname = '';
             // this.user.username = '';
             // this.user.password = '';
+        },
+        setHomePage(isHome) {
+            this.$store.commit({ type: 'setHomePage', isHome })
         }
+    },
+    created() {
+        this.setHomePage(true)
+    },
+    unmounted() {
+        this.setHomePage(false)
     },
     computed: {
         loginSignupBtnTxt() {
