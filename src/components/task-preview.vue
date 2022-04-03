@@ -243,7 +243,7 @@ export default {
       return { top: top + 'px', left: right + 'px' }
     },
     isIcons() {
-      return this.task.dueDate || this.task.description || this.numOfComments || this.task.attachments?.length || (this.task.checklists?.length && this.numOfTodos)
+      return this.task.dueDate || this.task.location || this.task.description || this.numOfComments || this.task.attachments?.length || (this.task.checklists?.length && this.numOfTodos)
     }
   }
 };
