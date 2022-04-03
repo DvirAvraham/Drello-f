@@ -121,6 +121,7 @@
 
 .preview-icon {
   @include taskPreviewIcon();
+  align-self: center;
   p {
     letter-spacing: -1px;
   }
