@@ -37,15 +37,8 @@
           cols="30"
           rows="10"
         ></textarea>
-        <div
-          class="icons"
-          v-if="task.status?.length || numOfComments || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length"
-        >
-          <div
-            class="icon-container flex"
-            v-if="this.task.cover?.type !== 'inline'"
-            :class="{ 'p-b-10': task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length }"
-          >
+        <div class="icons">
+          <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline' && isIcons">
             <div v-if="task.dueDate" class="duedate" @click.stop="toggleStatus">
               <span
                 class="preview-icon date"
@@ -249,6 +242,9 @@ export default {
       const right = this.$refs.tasky.getBoundingClientRect().right;
 
       return { top: top + 'px', left: right + 'px' }
+    },
+    isIcons() {
+      return this.task.dueDate || this.task.description || this.numOfComments || this.task.attachments?.length || (this.task.checklists?.length && this.numOfTodos)
     }
   }
 };
