@@ -178,6 +178,7 @@
 </template>
 <script>
 import { utilService } from '../services/utils-service.js';
+import { boardService } from '../services/board-service.js';
 import { socketService } from '../services/socket-service.js';
 import popupMain from './pop-up-main.vue';
 import attachment from "./attachment-cmp.vue";
@@ -267,18 +268,12 @@ export default {
         }
       }
 
-      const activity = {
-        by: this.miniUser,
-        createdAt: Date.now(),
-        txt: `${this.miniUser.username} mentioned you`
-      }
-
+      const activity = boardService.addActivity(`${this.miniUser.username} mentioned you`, this.miniUser._id, this.task._id, this.group._id, this.board._id);
       item.item.txt.split(' ').forEach(txt => {
         if (txt[0] === '@') {
           const username = txt.substring(1);
-          const user = this.board.members.find(member => member.fullname === username);
+          const user = this.board.members.find(member => member.fullname.split(' ')[0] === username);
           if (user) {
-            console.log('ytth', user);
             activity.toMemberId = user._id;
             activity.isMention = true;
             socketService.emit('notify user tag', activity)

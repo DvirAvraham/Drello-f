@@ -38,20 +38,23 @@ export default {
             }
             this.$emit('addItem', item)
         },
-        geocode(val) {
-            axios
-                .get('https://maps.googleapis.com/maps/api/geocode/json', {
+        async geocode(val) {
+            try {
+                let res = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
                     params: {
                         address: val,
                         key: 'AIzaSyCv9mke4qM6dFwfae-VsXNlKlW2Mnk4kBk',
                     },
                 })
-                .then(res => res.data.results[0].geometry.location)
-                .then(res => this.onPanTo(res.lat, res.lng));
+                res = res.data.results[0].geometry.location;
+                this.onPanTo(res.lat, res.lng)
+            } catch (err) {
+                console.log(err)
+            }
         },
 
-        onSearch() {
-            this.geocode(this.$refs["autocomplete"].value);
+        async onSearch() {
+            await this.geocode(this.$refs["autocomplete"].value);
         }
     },
     components: {

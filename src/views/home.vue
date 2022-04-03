@@ -17,11 +17,11 @@
 			</header>
 			<section class="info-container info-1 home-layout">
 				<section>
-					<h1>Smello helps teams move work forward.</h1>
+					<h1>Drello helps teams move work forward.</h1>
 					<p>
 						Collaborate, manage projects, and reach new productivity peaks. From
 						high rises to the home office, the way your team works is
-						unique—accomplish it all with Trello.
+						unique—accomplish it all with Drello.
 					</p>
 					<button class="btn-primary" @click="moveToBoards">Get Started</button>
 				</section>
@@ -31,16 +31,16 @@
 		</section>
 		<main class="home-layout">
 			<section class="info-container info-2">
-				<h2>It’s more than work. It’s a way of working together.</h2>
+				<h2>It's more than work. It's a way of working together.</h2>
 				<p>
-					Start with a Trello board, lists, and cards. Customize and expand with
+					Start with a Drello board, lists, and cards. Customize and expand with
 					more features as your teamwork grows. Manage projects, organize tasks,
 					and build team spirit—all in one place.
 				</p>
 			</section>
 			<section class="info-container info-3">
 				<img src="../images/homepage/board.png" class="board-img" alt="board" />
-				<p>Join over 1,000,000 teams worldwide that are using Trello to get more done.</p>
+				<p>Join over 1,000,000 teams worldwide that are using Drello to get more done.</p>
 				<img src="../images/trello-partners.png" class="trello-partners" />
 			</section>
 
@@ -48,7 +48,7 @@
 				<h2>Features to help your team succeed</h2>
 				<p>
 					Powering a productive team means using a powerful tool (and plenty of
-					snacks). From meetings and projects to events and goal setting, Trello’s
+					snacks). From meetings and projects to events and goal setting, Drello’s
 					intuitive features give any team the ability to quickly set up and
 					customize workflows for just about anything.
 				</p>
@@ -60,7 +60,7 @@
 					<h5>CHOOSE A VIEW</h5>
 					<h2>The board is just the beginning</h2>
 					<p>
-						Lists and cards are the building blocks of organizing work on a Trello
+						Lists and cards are the building blocks of organizing work on a Drello
 						board. Grow from there with task assignments, timelines, productivity
 						metrics, calendars, and more.
 					</p>
@@ -71,7 +71,7 @@
 					<h5>DIVE INTO THE DETAILS</h5>
 					<h2>Cards contain everything you need</h2>
 					<p>
-						Trello cards are your portal to more organized work—where every single
+						Drello cards are your portal to more organized work—where every single
 						part of your task can be managed, tracked, and shared with teammates.
 						Open any card to uncover an ecosystem of checklists, due dates,
 						attachments, conversations, and more.

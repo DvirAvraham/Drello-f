@@ -15,7 +15,7 @@
                         type="text"
                         placeholder="Enter Full Name"
                     />
-                    <input type="password" v-model="user.password" placeholder="Enter password" />
+                    <input type="password" v-model="user.password" placeholder="Enter Password" />
 
                     <button class="login-btn" @click="onLoginSignup">{{ loginSignupBtnTxt }}</button>
 

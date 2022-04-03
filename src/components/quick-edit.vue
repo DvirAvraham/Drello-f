@@ -80,7 +80,7 @@ export default {
         updateCover(cover) {
 
             this.taskToEdit.cover = cover;
-            this.$emit('addItem', '_', this.taskToEdit)
+            this.$emit('addItem', this.taskToEdit)
         },
         addItem(item) {
             if (item.type === 'labels') {
@@ -105,7 +105,7 @@ export default {
                 if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
                 this.taskToEdit.dueDate = item.item;
             }
-            this.$emit('addItem', '_', this.taskToEdit)
+            this.$emit('addItem', this.taskToEdit)
         },
         async updateLabels(updatedLabels, item) {
             try {
