@@ -26,7 +26,8 @@ app.use(ElementPlus);
 app.use(timeago);
 app.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyDxg1BG-_6y4c06PrVYvHH76q51dKWkOGs',
+        key: 'AIzaSyDtacGFKDZu-p73ElA1OFnZCeT-jGafFHw',
+        libraries: "places"
     },
 })
 app.mount('#app');

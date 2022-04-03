@@ -64,7 +64,7 @@ export default {
     }
   },
   created() {
-    this.board.activities
+    // this.board.activities
   },
   unmounted() {
     this.currSection = 'Menu'

@@ -6,6 +6,7 @@
       type="textarea"
       placeholder="Enter a title for this card..."
       class="inline-input"
+      @keydown.prevent.enter="addTask"
     />
     <section class="add-task-btns">
       <button @click="addTask" class="add-card-btn">Add card</button>
@@ -29,7 +30,7 @@ export default {
   },
   methods: {
     addTask() {
-      if (!this.title) return;
+      if (!this.title || this.title === '\n') return this.title = '';
       this.$emit('addTask', this.title);
       this.isCreating = null;
       this.title = '';
