@@ -37,4 +37,8 @@ export default {
         boardPreview
     }
 }
+var img = new Image()
+img.onload = () => {
+}
+img.src = 'img/1.jpg'
 </script>

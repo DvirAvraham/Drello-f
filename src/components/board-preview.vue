@@ -5,10 +5,9 @@
             <section class="star" @click.stop="toggleFavorite(board._id)">
                 <i
                     v-if="!user.favorites?.includes(board._id)"
-                    class="fa-regular fa-star white-font"
+                    class="fa-regular fa-star white-font empty-star"
                 ></i>
                 <i v-else class="fa-solid fa-star"></i>
-                <i v-if="this.user.favorites.includes(board._id)" class="fa-solid fa-star"></i>
             </section>
         </div>
         <div class="small-overlay"></div>

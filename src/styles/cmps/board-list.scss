@@ -22,7 +22,7 @@
         // display: block;
          opacity: 0.2;
         }
-        .star{
+        .empty-star{
           transform: translateX(0);
           opacity: 1;
           transition:  0.3s;
@@ -56,8 +56,11 @@
     right: 10px;
     bottom: 10px;
     z-index: 5;
-    transition:  0.3s;
-    transform: translateX(15px);
-    opacity: 0;
+    .empty-star{
+      transform: translateX(15px);
+      transition:  0.3s;
+      opacity: 0;
+
+    }
   }
 }
