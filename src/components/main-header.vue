@@ -33,7 +33,7 @@
         </button>
       </div>
       <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard"></createBoard>
-      <div class="header-btn hidden-btn-header" @click="toggleRecentBoards">
+      <div class="header-btn hidden-btn-header" title="Recent" @click="toggleRecentBoards">
         <span>Recent</span>
         <svg
           width="16"
@@ -57,7 +57,7 @@
         :user="user"
         class="popup"
       ></recent-boards-popup>
-      <div class="header-btn hidden-btn-header" @click="toggleFavoriteBoards">
+      <div class="header-btn hidden-btn-header" title="Starred" @click="toggleFavoriteBoards">
         <span>Starred</span>
         <svg
           width="16"
@@ -106,8 +106,8 @@
 
     <section class="secondery-container flex align-items">
       <!-- <button v-if="user" @click="logout">LOGOUT</button> -->
-      <div class="main-header-input flex" :class="{ focused: isInputFocused }">
-        <span class="icon-search flex" @click="focusInput"></span>
+      <div class="main-header-input flex" :class="{ focused: isInputFocused }" @click="focusInput">
+        <span class="icon-search flex"></span>
         <input
           v-model="filterBy.title"
           @blur="isInputFocused = false;"

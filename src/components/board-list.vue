@@ -6,6 +6,7 @@
             :board="board"
             :key="board"
             @click="moveToBoard(board._id)"
+            :title="board.title"
         />
     </ul>
 </template>

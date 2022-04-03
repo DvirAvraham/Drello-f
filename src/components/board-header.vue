@@ -20,7 +20,7 @@
       />
       <members-preview :board="board" />
 
-      <div class="invite-members-container">
+      <div class="invite-members-container" title="Invite to board">
         <button class="btn" @click="isInviteModal = !isInviteModal">
           <span class="board-header-invite-icon"></span> Invite
         </button>

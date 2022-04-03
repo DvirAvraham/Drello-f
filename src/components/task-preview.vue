@@ -21,6 +21,7 @@
             class="label"
             :style="{ 'background-color': label.color }"
             :class="{ 'openLabel': labelStatus }"
+            :title="label.title"
           >{{ label.title }}</div>
         </div>
         <p
@@ -51,20 +52,20 @@
                 {{ date }}
               </span>
             </div>
-            <div class="preview-icon" v-if="task.description">
+            <div class="preview-icon" v-if="task.description" title="This card has a description.">
               <span class="icon-description"></span>
             </div>
 
-            <div class="preview-icon" v-if="numOfComments">
+            <div class="preview-icon" v-if="numOfComments" title="Comments">
               <span class="icon-chat"></span>
               <p>{{ numOfComments }}</p>
             </div>
 
-            <div class="preview-icon" v-if="task.location">
+            <div class="preview-icon" v-if="task.location" title="Location">
               <span class="icon-location"></span>
             </div>
 
-            <div class="preview-icon" v-if="task.attachments?.length">
+            <div class="preview-icon" v-if="task.attachments?.length" title="Attachments">
               <span class="icon-attachment"></span>
               <p>{{ task.attachments?.length }}</p>
             </div>
@@ -72,6 +73,7 @@
               class="preview-icon"
               v-if="task.checklists?.length && numOfTodos"
               :class="{ completed: tasksDone === numOfTodos }"
+              title="Checklist items"
             >
               <span class="icon-checklist"></span>
               <p>{{ tasksDone }} / {{ numOfTodos }}</p>

@@ -2,7 +2,7 @@
     <li :style="boardStyle" v-if="board">
         <div class="preview-content">
             <h2>{{ board.title }}</h2>
-            <section class="star" @click.stop="toggleFavorite(board._id)">
+            <section class="star" @click.stop="toggleFavorite(board._id)" :title="starTxt">
                 <i
                     v-if="!user.favorites?.includes(board._id)"
                     class="fa-regular fa-star white-font empty-star"
@@ -37,6 +37,12 @@ export default {
         user() {
             return this.$store.getters.user;
 
+        },
+        starTxt() {
+            const isUserFavorite = this.user.favorites?.includes(this.board._id);
+            const starOrUnstar = isUserFavorite ? 'unstar' : 'star';
+            const addedOrRemoved = isUserFavorite ? 'removed' : 'added';
+            return `Click to ${starOrUnstar} this board. It will be ${addedOrRemoved} from your starred list.`;
         }
     }
 }

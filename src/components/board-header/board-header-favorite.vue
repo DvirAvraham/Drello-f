@@ -1,5 +1,5 @@
 <template>
-    <section class="board-header-favorite" @click="toggleFavorite">
+    <section class="board-header-favorite" @click="toggleFavorite" :title="starTxt">
         <i :class="favoriteIcon"></i>
     </section>
 </template>
@@ -36,6 +36,11 @@ export default {
     computed: {
         favoriteIcon() {
             return this.isFavorite ? 'fa-solid fa-star' : 'fa-regular fa-star';
+        },
+        starTxt() {
+            const starOrUnstar = this.isFavorite ? 'unstar' : 'star';
+            const addedOrRemoved = this.isFavorite ? 'removed' : 'added';
+            return `Click to ${starOrUnstar} this board. It will be ${addedOrRemoved} from your starred list.`;
         }
     }
 }
