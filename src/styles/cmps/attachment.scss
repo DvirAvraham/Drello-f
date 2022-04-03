@@ -8,14 +8,16 @@
         cursor: pointer;
         
         .image-container{
+            
             background-color: #091e420a;
             border-radius: 3px;
         }
         img{
             border-radius: 3px;
-            object-fit: fill;
             width: 112px;
             height: 80px;
+            object-position: center;
+            object-fit: cover;
         }
         .attachment-action{
             text-decoration: underline;
