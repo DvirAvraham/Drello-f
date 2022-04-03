@@ -30,7 +30,7 @@
         >{{ task.title }}</p>
         <textarea
           v-model="taskCopy.title"
-          @change="updateTask"
+          @change="updateTask(taskCopy)"
           v-if="isQuickEdit"
           name
           id
@@ -169,9 +169,8 @@ export default {
       this.$emit('onQuickEdit', false)
       this.isQuickEdit = false
     },
-    updateTask(editedTask = this.taskCopy) {
+    updateTask(editedTask) {
       this.$emit('updateTask', JSON.parse(JSON.stringify(editedTask)))
-      this.taskCopy = JSON.parse(JSON.stringify(this.task))
     },
     openTask() {
       this.closeQuickEdit()
