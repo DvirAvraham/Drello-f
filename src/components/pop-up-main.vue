@@ -21,7 +21,7 @@
     </header>
     <main>
       <component
-        :is="action"
+        :is="cmp"
         @addItem="addItem"
         :board="currBoard"
         @updateLabels="updateLabels"
@@ -47,9 +47,8 @@ export default {
   name: 'pop-up-main',
   props: {
     popupData: Object,
-    action: String,
-    task: Object,
-    actionType: '',
+    cmp: String,
+    task: Object
 
   },
 

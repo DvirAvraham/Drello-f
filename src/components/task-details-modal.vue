@@ -165,7 +165,7 @@
           @closePopup="closePopup"
           :popupData="popupData"
           @updateCover="updateCover"
-          :action="actionType"
+          :cmp="actionType"
           v-if="actionType"
           @addItem="addItem"
           @setItem="setItem"

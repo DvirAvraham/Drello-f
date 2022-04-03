@@ -1,6 +1,5 @@
 <template >
     <section class="board-filter">
-        <user-notification />
         <header>
             <span class="icon-back" v-if="currSection !== 'Menu'" @click="goBack"></span>
             <h3>Filter</h3>
@@ -84,7 +83,6 @@
     </section>
 </template>
 <script>
-import userNotification from './user-notification.vue'
 export default {
     name: 'close-filter',
     props: {
@@ -118,8 +116,6 @@ export default {
             this.$emit('setFilter', { ...this.filterBy })
         },
     },
-    components: {
-        userNotification
-    }
+
 }
 </script>

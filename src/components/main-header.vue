@@ -118,6 +118,7 @@
         <board-search v-click-outside="toggleBoardSearch" v-if="isBoardSearch" :filterBy="filterBy"></board-search>
       </div>
       <div
+        v-if="user"
         class="notification-btn"
         @click="toggleNotificationsModal"
         :class="{ 'red-bg': isReaden }"
@@ -232,7 +233,8 @@ export default {
       return this.$store.getters.boards
     },
     isReaden() {
-      return this.$store.getters.user?.activities.some(activity => !activity.isReaden)
+      console.log(this.$store.getters?.user)
+      return this.$store.getters?.user?.activities.some(activity => !activity.isReaden)
     }
 
 
