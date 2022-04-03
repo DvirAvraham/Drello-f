@@ -16,7 +16,9 @@
                 class="inline-input"
                 v-model="groupTitle"
                 v-focus
+                @keydown.enter="addGroup"
                 placeholder="Enter list title..."
+                ref="addGroupInput"
             />
             <section class="add-group-btns">
                 <button @click="addGroup" class="add-group-btn">Add list</button>
@@ -42,6 +44,7 @@ export default {
             if (!this.groupTitle) return;
             this.$emit('add', this.groupTitle);
             this.groupTitle = '';
+            this.$refs.addGroupInput.focus();
         },
         close() {
             this.isFocused = false;
