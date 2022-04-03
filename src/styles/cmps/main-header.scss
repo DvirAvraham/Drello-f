@@ -179,6 +179,11 @@
   box-shadow: unset;
   margin-right: 9px;
 
+  &:hover:not(.focused) {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
   &.focused {
     background-color: #fff;
     .icon-search {
