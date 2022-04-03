@@ -41,7 +41,12 @@
             <label>
                 Board title
                 <span class="red-text">*</span>
-                <input type="text" class="board-title-inp" v-model="boardToAdd.title" />
+                <input
+                    type="text"
+                    class="board-title-inp"
+                    v-model="boardToAdd.title"
+                    @keydown.enter="addBoard"
+                />
             </label>
         </div>
         <button :disabled="!boardToAdd.title" class="create-board-btn" @click="addBoard">Create</button>
