@@ -68,8 +68,8 @@ export default {
 						title = "You've been mentioned"
 						message = byMember.fullname + ' just menitoned you task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 					} else {
-						title = "You've been tagged"
-						message = byMember.fullname + ' just tagged you at task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
+						title = "You've been added to a new task !"
+						message = byMember.fullname + ' just added you to a task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 					}
 				}
 				if (userService.getLoggedinUser()._id === activity.toMemberId) {
