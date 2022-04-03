@@ -8,6 +8,7 @@
                     class="fa-regular fa-star white-font"
                 ></i>
                 <i v-else class="fa-solid fa-star"></i>
+                <i v-if="this.user.favorites.includes(board._id)" class="fa-solid fa-star"></i>
             </section>
         </div>
         <div class="small-overlay"></div>

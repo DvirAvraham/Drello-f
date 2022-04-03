@@ -20,7 +20,7 @@
     &:hover{
       .small-overlay{
         // display: block;
-         opacity: 0.15;
+         opacity: 0.2;
         }
         .star{
           transform: translateX(0);
@@ -33,7 +33,7 @@
       position: absolute;
       inset: 0;
       background-color: black;
-      opacity: 0;
+      opacity: 0.10;
       z-index: 1;
       transition: opacity .3s;
     }
@@ -45,6 +45,7 @@
       font-weight: bold;
       line-height: 20px;
       margin: 2px 0 0 0;
+      text-shadow: 0px 0px 2px black;
       
     }
   }

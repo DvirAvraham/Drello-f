@@ -125,12 +125,14 @@
       >
         <span class="icon icon-bell"></span>
       </div>
-      <user-notification
-        @closeModal="toggleNotificationsModal"
-        v-click-outside="toggleNotificationsModal"
-        v-if="isNotificationModal"
-        class="popup"
-      ></user-notification>
+      <Transition>
+        <user-notification
+          @closeModal="toggleNotificationsModal"
+          v-click-outside="toggleNotificationsModal"
+          v-if="isNotificationModal"
+          class="popup"
+        ></user-notification>
+      </Transition>
       <!-- <i class="fa-regular fa-bell notification-header"></i> -->
       <div class="user">
         <avatar
@@ -264,5 +266,14 @@ export default {
   max-width: 200px;
   color: #172b4d;
   outline: 0;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

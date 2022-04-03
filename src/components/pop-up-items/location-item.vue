@@ -18,7 +18,7 @@ export default {
             this.$refs["autocomplete"],
             {
                 types: ['establishment'],
-                componentRestrictions: { 'country': ['IL'] },
+                componentRestrictions: { 'country': ['US'] },
                 fields: ['place._id', 'geometry', 'name']
             });
 
