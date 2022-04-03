@@ -62,14 +62,14 @@ export default {
 			if (activity.toMemberId) {
 				if (!activity.groupId) {
 					title = "You've been added to a new board !"
-					message = byMember.fullname + ` just added you to a new board ` + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+					message = byMember.fullname + ` just added you to a new board ` + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 				} else {
 					if (activity.isMention) {
 						title = "You've been mentioned"
-						message = byMember.fullname + ' just menitoned you task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+						message = byMember.fullname + ' just menitoned you task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 					} else {
 						title = "You've been tagged"
-						message = byMember.fullname + ' just tagged you at task at' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+						message = byMember.fullname + ' just tagged you at task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 					}
 				}
 				if (userService.getLoggedinUser()._id === activity.toMemberId) {
@@ -78,7 +78,7 @@ export default {
 				}
 			} else if (activity.byMemberId !== this.miniUser._id && board.members.find(member => member._id === this.miniUser._id)) {
 				title = activity.txt
-				message = byMember.fullname + ' just ' + title + ' to ' + `<a class="notification-link" href=http://localhost:3000/#/board/${activity.boardId}> board ${board.title} </a>`
+				message = byMember.fullname + ' just ' + title + ' to ' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 				this.notify(null, title, message)
 				this.$store.commit({ type: 'updateActivities', activity })
 			}
