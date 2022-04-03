@@ -50,6 +50,13 @@
             <attachment :attachments="taskToEdit.attachments" @updateAttachments="updateItem" />
           </div>
         </div>
+
+        <div v-if="task.location" class="task-location">
+          <div class="block-title">
+            <span class="icon"></span>
+            <h3>Location</h3>
+          </div>
+        </div>
         <div v-if="task.location" class="location-container">
           <GMapMap
             class="maps"
