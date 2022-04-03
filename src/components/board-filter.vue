@@ -83,7 +83,6 @@
     </section>
 </template>
 <script>
-
 export default {
     name: 'close-filter',
     props: {
@@ -117,6 +116,7 @@ export default {
             this.$emit('setFilter', { ...this.filterBy })
         },
     },
+
     components: {
     }
 }
