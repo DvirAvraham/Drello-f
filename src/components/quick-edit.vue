@@ -31,7 +31,7 @@
             ref="popup"
             :task="task"
             :popupData="popupData"
-            :action="actionType"
+            :cmp="actionType"
             v-if="actionType"
             @addItem="addItem"
             @updateLabels="updateLabels"
