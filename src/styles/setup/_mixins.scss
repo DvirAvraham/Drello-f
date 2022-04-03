@@ -224,6 +224,10 @@
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
   }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 }
 
 @mixin addSaveBtn($width: 53px, $margin: 5px 0 0 0, $clr: white) {
