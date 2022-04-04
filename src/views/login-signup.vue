@@ -51,6 +51,8 @@ export default {
     },
     created() {
         this.isLogin = (this.$route.path === '/login');
+    },
+    mounted() {
         this.setHomePage(true)
     },
     methods: {
