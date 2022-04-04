@@ -10,9 +10,9 @@
   transition: all 0.3s;
   color: #091e42;
 
-  // span {
-  //   margin-right: 10px;
-  // }
+  .icon-back{
+    opacity: 0;
+  }
   label p {
     font-size: 14px;
     font-weight: normal;
@@ -80,7 +80,7 @@
       }
     }
   }
-  span {
+  span:not(.header-icon) {
     width: 24px;
     height: 24px;
     display: flex;

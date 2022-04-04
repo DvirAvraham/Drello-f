@@ -1,9 +1,9 @@
 <template >
     <section class="board-filter">
         <header>
-            <span class="icon-back" v-if="currSection !== 'Menu'" @click="goBack"></span>
+            <span class="icon-back header-icon" @click="goBack"></span>
             <h3>Filter</h3>
-            <span class="icon-cancel" @click="closeFilter"></span>
+            <span class="icon-cancel header-icon" @click="closeFilter"></span>
         </header>
         <div class="search-inp">
             <h4>Keyword</h4>
