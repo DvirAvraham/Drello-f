@@ -127,42 +127,43 @@
         </button>-->
         <div>
           <h3>Add To card</h3>
-          <button @click="setMembers('membersItem')">
+          <button @click="setMembers('membersItem')" title="Members">
             <span class="icon-members"></span>
             Members
           </button>
-          <button @click="setLabels('labelsItem')">
+          <button @click="setLabels('labelsItem')" title="Labels">
             <span class="icon-label"></span>
             Labels
           </button>
-          <button @click="setChecklist('checklistItem')">
+          <button @click="setChecklist('checklistItem')" title="Checklist">
             <span class="icon-checklist"></span>
             Checklist
           </button>
-          <button @click="setDate('dateItem')">
+          <button @click="setDate('dateItem')" title="Dates">
             <span class="icon-time"></span>
             Dates
           </button>
-          <button @click="setAttachments('attachmentItem')">
+          <button @click="setAttachments('attachmentItem')" title="Attachments">
             <span class="icon-attachment"></span>
             Attachments
           </button>
-          <button @click="setLocation('locationItem')">
+          <button @click="setLocation('locationItem')" title="Location">
             <span class="icon-location"></span>
             Location
           </button>
-          <button @click="setCover('coverItem')">
+          <button @click="setCover('coverItem')" title="Cover">
             <span class="icon-cover"></span>
             Cover
           </button>
         </div>
+
         <div>
           <h3>Actions</h3>
-          <button>
+          <button title="Copy">
             <span class="icon-copy"></span>
             Copy
           </button>
-          <button>
+          <button title="Share">
             <span class="icon-share"></span>
             Share
           </button>

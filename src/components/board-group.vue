@@ -15,7 +15,8 @@
         <section class="group-title">
           <textarea
             :value="group.title"
-            @change="editGroupTitle($event, group, idx)"
+            @blur="editGroupTitle($event, group, idx)"
+            @keydown.enter="editGroupTitle($event, group, idx)"
             spellcheck="false"
             class="group-title inline-input"
           ></textarea>
@@ -131,6 +132,7 @@ export default {
       this.$emit('addGroup', title);
     },
     editGroupTitle($event, group, idx) {
+      $event.target.blur(); // needed when pressing enter
       const newTitle = $event.target.value;
       if (!newTitle) return $event.target.value = group.title;
       const groupToSave = JSON.parse(JSON.stringify(group));

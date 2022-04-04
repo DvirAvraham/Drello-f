@@ -1,5 +1,5 @@
 <template>
-    <li :style="boardStyle" v-if="board">
+    <li :style="boardStyle" v-if="board" :title="board.title">
         <div class="preview-content">
             <h2>{{ board.title }}</h2>
             <section class="star" @click.stop="toggleFavorite(board._id)" :title="starTxt">

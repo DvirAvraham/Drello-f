@@ -40,7 +40,12 @@
         ></textarea>
         <div class="icons">
           <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline' && isIcons">
-            <div v-if="task.dueDate" class="duedate" @click.stop="toggleStatus">
+            <div
+              v-if="task.dueDate"
+              class="duedate"
+              @click.stop="toggleStatus"
+              :title="dueDateTitle"
+            >
               <span
                 class="preview-icon date"
                 :style="{ 'font-size': 12 + 'px' }"
@@ -246,6 +251,13 @@ export default {
     },
     isIcons() {
       return this.task.dueDate || this.task.location || this.task.description || this.numOfComments || this.task.attachments?.length || (this.task.checklists?.length && this.numOfTodos)
+    },
+    dueDateTitle() {
+      let status;
+      if (!this.task.status) status = 'due later.'
+      else status = (this.task.status === 'completed') ? 'complete.' : 'overdue!';
+
+      return `This card is ${status}`;
     }
   }
 };
