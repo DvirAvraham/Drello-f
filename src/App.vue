@@ -62,7 +62,7 @@ export default {
 			if (activity.toMemberId) {
 				if (!activity.groupId) {
 					title = "You've been added to a new board !"
-					message = byMember.fullname + ` just added you to a new board ` + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
+					message = byMember.fullname + ` just added you to a new board ` + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> ${board.title} </a>`
 				} else {
 					if (activity.isMention) {
 						title = "You've been mentioned"
