@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper" :style="boardStlye">
+	<div ref="wrapper" class="wrapper" :style="boardStlye">
 		<app-header v-if="!isHomePage" />
 		<router-view />
 	</div>
@@ -83,6 +83,10 @@ export default {
 				this.$store.commit({ type: 'updateActivities', activity })
 			}
 		},
+
+	},
+	mounted() {
+		console.log(this.$refs.wrapper)
 	},
 	computed: {
 		boards() {

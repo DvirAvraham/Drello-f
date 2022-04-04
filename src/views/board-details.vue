@@ -24,6 +24,8 @@
 				:board="currBoard"
 			/>
 		</section>
+
+		<!-- <img ref="targetImg" id="target-img" :src="currBoard.style.bgImg" @load="getPalette()" /> -->
 	</section>
 </template>
 
@@ -33,6 +35,7 @@ import boardGroup from '../components/board-group.vue';
 import { socketService } from '../services/socket-service.js';
 import { boardService } from '../services/board-service';
 import boardHeader from '../components/board-header.vue'
+import Vibrant from "node-vibrant"
 
 export default {
 	name: 'board-details',
@@ -48,7 +51,8 @@ export default {
 				labels: [],
 				members: [],
 				dueDate: [],
-			}
+			},
+			palette: {},
 		};
 	},
 
@@ -76,10 +80,23 @@ export default {
 
 		// socketService.on('board update', this.loadBoard())
 	},
+
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
 	},
 	methods: {
+		getPalette() {
+			const img = this.$refs.targetImg
+			const vibrant = new Vibrant(img);
+
+			img.setAttribute('crossOrigin', 'anonymous')
+			vibrant.getPalette().then(
+				(palette) => this.palette = palette,
+				(reason) => {
+					console.error(reason);
+				}
+			)
+		},
 		async loadBoard() {
 			try {
 				const boardId = this.$route.params.boardId;
@@ -170,6 +187,13 @@ export default {
 		},
 	},
 	computed: {
+		accent() {
+			if (!this.palette) {
+				console.log('this.palette', this.palette)
+				return `crismon`;
+			}
+			return this.palette.Vibrant.getHex()
+		},
 		user() {
 			return this.$store.getters.user;
 		},

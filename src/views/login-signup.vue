@@ -51,6 +51,7 @@ export default {
     },
     created() {
         this.isLogin = (this.$route.path === '/login');
+        this.setHomePage(true)
     },
     methods: {
         async onLoginSignup() {
@@ -93,9 +94,6 @@ export default {
         setHomePage(isHome) {
             this.$store.commit({ type: 'setHomePage', isHome })
         }
-    },
-    created() {
-        this.setHomePage(true)
     },
     unmounted() {
         this.setHomePage(false)
