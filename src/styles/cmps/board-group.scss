@@ -22,6 +22,10 @@
   }
 }
 
+.board-container {
+  overflow: hidden;
+}
+
 .board-container > .group-container-scrollable > .smooth-dnd-container > .smooth-dnd-draggable-wrapper:first-of-type {
   margin-left: 12px;
 }
