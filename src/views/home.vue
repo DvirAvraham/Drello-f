@@ -100,6 +100,9 @@ export default {
 	created() {
 		this.setHomePage(true)
 	},
+	beforeUnmounted() {
+		this.setHomePage(false)
+	},
 	unmounted() {
 		this.setHomePage(false)
 	},
