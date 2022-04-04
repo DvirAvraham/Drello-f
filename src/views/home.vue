@@ -97,9 +97,9 @@ export default {
 			this.$store.commit({ type: 'setHomePage', isHome })
 		}
 	},
-	created() {
-		console.log('creating home')
+	mounted() {
 		this.setHomePage(true)
+
 	},
 	unmounted() {
 		console.log('umounted app vue')
