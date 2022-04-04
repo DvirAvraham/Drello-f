@@ -26,7 +26,7 @@ app.use(ElementPlus);
 app.use(timeago);
 app.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyDtacGFKDZu-p73ElA1OFnZCeT-jGafFHw',
+        key: `AIzaSyDtacGFKDZu-p73ElA1OFnZCeT-jGafFHw`,
         libraries: "places"
     },
 })
