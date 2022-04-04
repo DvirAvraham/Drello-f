@@ -41,8 +41,8 @@ export default {
         starTxt() {
             const isUserFavorite = this.user.favorites?.includes(this.board._id);
             const starOrUnstar = isUserFavorite ? 'unstar' : 'star';
-            const addedOrRemoved = isUserFavorite ? 'removed' : 'added';
-            return `Click to ${starOrUnstar} this board. It will be ${addedOrRemoved} from your starred list.`;
+            const addedOrRemoved = isUserFavorite ? 'removed from' : 'added to';
+            return `Click to ${starOrUnstar} this board. It will be ${addedOrRemoved} your starred list.`;
         }
     }
 }

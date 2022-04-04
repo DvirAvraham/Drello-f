@@ -39,8 +39,8 @@ export default {
         },
         starTxt() {
             const starOrUnstar = this.isFavorite ? 'unstar' : 'star';
-            const addedOrRemoved = this.isFavorite ? 'removed' : 'added';
-            return `Click to ${starOrUnstar} this board. It will be ${addedOrRemoved} from your starred list.`;
+            const addedOrRemoved = this.isFavorite ? 'removed from' : 'added to';
+            return `Click to ${starOrUnstar} this board. It will be ${addedOrRemoved} your starred list.`;
         }
     }
 }

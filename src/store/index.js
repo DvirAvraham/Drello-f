@@ -8,12 +8,12 @@ const store = createStore({
     isHomePage: false,
   },
   getters: {
-    isHomePage({isHomePage}){
+    isHomePage({ isHomePage }) {
       return isHomePage
     }
   },
   mutations: {
-    setHomePage(state,{isHome}){
+    setHomePage(state, { isHome }) {
       state.isHomePage = isHome
     }
   },
