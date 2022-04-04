@@ -98,12 +98,11 @@ export default {
 		}
 	},
 	created() {
+		console.log('creating home')
 		this.setHomePage(true)
 	},
-	beforeUnmounted() {
-		this.setHomePage(false)
-	},
 	unmounted() {
+		console.log('umounted app vue')
 		this.setHomePage(false)
 	},
 	computed: {

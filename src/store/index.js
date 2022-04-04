@@ -15,6 +15,7 @@ const store = createStore({
   mutations: {
     setHomePage(state, { isHome }) {
       state.isHomePage = isHome
+      console.log(state.isHomePage)
     }
   },
   actions: {},

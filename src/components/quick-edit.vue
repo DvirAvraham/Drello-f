@@ -100,6 +100,12 @@ export default {
                 } else {
                     this.taskToEdit.members.push(item.item);
                 }
+                this.$store.dispatch({
+                    type: 'setTask',
+                    task: JSON.parse(JSON.stringify(this.taskToEdit)),
+                    action: item
+                });
+                this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
             }
             if (item.type === 'dueDate') {
                 if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
