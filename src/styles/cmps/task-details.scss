@@ -116,6 +116,7 @@
     }
   }
   .task-detail-main {
+    position: relative;
     display: flex;
     margin-top: 20px;
     .task-content {
@@ -390,14 +391,16 @@
 
 .members-item.find-members {
   position: absolute;
-  top: 36px;
-  left: 57vw;
+  // top: 36px;
+  // left: 57vw;
   width: 304px;
   z-index: 10;
   background-color: #ffffff;
   border-radius: 3px;
   box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
-  top: 41vw;
+  // top: 41vw;
+  bottom: -50px;
+  left: 168px;
 
   & .member {
     margin: 3px 0px 10px 15px;

@@ -66,7 +66,7 @@ export default {
 				} else {
 					if (activity.isMention) {
 						title = "You've been mentioned"
-						message = byMember.fullname + ' just menitoned you task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
+						message = byMember.fullname + ' just menitoned you on a task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
 					} else {
 						title = "You've been added to a new task !"
 						message = byMember.fullname + ' just added you to a task at' + `<a class="notification-link" href=https://drello-app.herokuapp.com/#/board/${activity.boardId}> board ${board.title} </a>`
