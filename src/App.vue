@@ -42,12 +42,14 @@ export default {
 					message,
 					dangerouslyUseHTMLString: true,
 					type: 'success',
+					duration: 2000
 				})
 			} else ElNotification({
 				title,
 				message,
 				dangerouslyUseHTMLString: true,
 				type: 'info',
+				duration: 2000
 			})
 		},
 		async notifyActivity(activity) {
