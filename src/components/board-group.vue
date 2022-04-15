@@ -9,6 +9,7 @@
     drop-class="dropping"
     :animation-duration="0"
     @drop="onGroupDrop($event)"
+    @touchend="enableMobileScrolling"
   >
     <Draggable class v-for="(group, idx) in scene.groups" :key="group._id">
       <section class="group-container">
@@ -43,6 +44,7 @@
           drop-class="dropping"
           :animation-duration="0"
           @drop="(e) => onTaskDrop(group._id, e)"
+          @touchend="enableMobileScrolling"
         >
           <!-- tasks -->
           <task-preview
@@ -219,6 +221,9 @@ export default {
         return group._id
       })
       this.$emit('editTask', task)
+    },
+    enableMobileScrolling() {
+      document.body.classList.remove('smooth-dnd-no-user-select', 'smooth-dnd-disable-touch-action');
     }
   },
 };
